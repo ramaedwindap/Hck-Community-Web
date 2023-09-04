@@ -3,7 +3,7 @@ import React from "react";
 export default function Sidebar() {
   return (
     <div className="hidden md:block w-[260px] shrink-0 mr-4">
-      <div className="border border-slate-100 shadow-sm bg-white rounded-lg p-4">
+      <div className="border border-slate-100 shadow-sm bg-white rounded-xl p-4">
         <div className="mb-5 font-bold text-xl text-slate-900">
           DEV Community is a community of 1,133,658 amazing developers
         </div>

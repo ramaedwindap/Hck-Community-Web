@@ -1,6 +1,7 @@
 import React from "react";
 import PostCard from "../components/PostCard";
 import Sidebar from "../components/Sidebar";
+import Rightbar from "../components/Rightbar";
 
 export default function HomePage() {
   return (
@@ -24,7 +25,7 @@ export default function HomePage() {
 
               <PostCard />
             </div>
-            <div className="hidden lg:block w-[250px] shrink-0">Right</div>
+            <Rightbar />
           </div>
         </div>
       </div>
