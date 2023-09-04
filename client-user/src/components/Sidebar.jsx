@@ -5,17 +5,17 @@ export default function Sidebar() {
     <div className="hidden md:block w-[260px] shrink-0 mr-4">
       <div className="border border-slate-100 shadow-sm bg-white rounded-xl p-4">
         <div className="mb-5 font-bold text-xl text-slate-900">
-          DEV Community is a community of 1,133,658 amazing developers
+          HCK Community is a community of 1,133,658 amazing developers
         </div>
         <div className="mb-5">
           We're a place where coders share, stay up-to-date and grow their
           careers.
         </div>
         <div>
-          <button className="w-full hover:underline mb-1 border border-blue-500 px-3 py-2 rounded-lg text-center text-blue-600 hover:text-white font-semibold hover:bg-blue-600">
+          <button className="w-full hover:underline mb-1 border border-blue-500 text-sm px-3 py-2 rounded-lg text-center text-blue-600 hover:text-white font-semibold hover:bg-blue-600">
             Create account
           </button>
-          <button className="w-full hover:underline hover:bg-blue-50 px-3 py-2 rounded-lg hover:text-blue-600 text-center">
+          <button className="w-full hover:underline hover:bg-blue-50 px-3 py-2 text-sm rounded-lg hover:text-blue-600 text-center">
             Log in
           </button>
         </div>

@@ -20,7 +20,7 @@ export default function PostCard() {
             />
 
             <div>
-              <p className="text-base font-medium">Claire Mac</p>
+              <p className="text-sm font-semibold">Claire Mac</p>
 
               <div className="flow-root">
                 <p className="text-sm">Sep 4</p>
