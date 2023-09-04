@@ -1,50 +1,57 @@
 import React from "react";
 import { BookmarkIcon } from "@heroicons/react/24/solid";
 
-export default function PostCard() {
+export default function PostCard(props) {
+  //   console.log(post);
+  const { post } = props;
+  //   console.log(props, "props post");
   return (
     <div>
       <article className="overflow-hidden sm:rounded-2xl border -mx-4 sm:mx-0 border-gray-100 bg-white shadow-sm">
         <img
-          alt="Office"
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+          src={post?.imgUrl}
+          alt={post?.title}
           className="h-56 w-full object-cover"
         />
 
         <div className="p-4 sm:p-6">
           <div className="flex items-center gap-4 mb-4">
             <img
-              alt="Developer"
-              src="https://images.unsplash.com/photo-1614644147724-2d4785d69962?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-              className="h-10 w-10 rounded-full object-cover"
+              alt={post?.author?.username}
+              src={`https://ui-avatars.com/api/?name=${post?.author?.username}`}
+              className="h-10 w-10 rounded-full flex-none object-cover"
             />
 
             <div>
-              <p className="text-sm font-semibold">Claire Mac</p>
+              <p className="text-sm font-semibold">{post?.author?.username}</p>
 
               <div className="flow-root">
-                <p className="text-sm">Sep 4</p>
+                <p className="text-sm">{post?.createdAt}</p>
               </div>
             </div>
           </div>
 
           <a href="#">
             <p className="text-2xl pl-14 line-clamp-2 font-semibold text-gray-900">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut a
-              expedita vitae? Dolorem, dolorum? Illum, totam ducimus. Facere
-              numquam nisi, inventore recusandae ad eveniet ex rerum corporis
-              ipsa mollitia iure!
+              {post?.content}
             </p>
           </a>
 
           <div className="flex pl-14 flex-wrap py-2 gap-2">
-            <button className="px-3 bg-green-50 py-1.5 rounded-lg text-xs border border-white hover:border-green-500 text-slate-800">
-              Test
-            </button>
+            {post?.tags?.map((tag) => {
+              return (
+                <button
+                  key={tag.id}
+                  className="px-3 bg-green-50 py-1.5 rounded-lg text-xs border border-white hover:border-green-500 text-slate-800"
+                >
+                  #{tag.name}
+                </button>
+              );
+            })}
           </div>
 
           <p className="group mt-4 flex justify-end items-center gap-1 text-xs font-medium text-slate-700">
-            5 min read
+            {post?.estimateRead} min read
             <button>
               <BookmarkIcon className="h-4 w-4 ml-2 text-black" />
             </button>

@@ -24,12 +24,12 @@
     "tags": [
         {
             "id": 1,
-            "body": "some tags",
+            "name": "some tags",
             "postId": 1
         },
         {
-            "id": 1,
-            "body": "some tags",
+            "id": 2,
+            "name": "some tags",
             "postId": 1
         }
     ],

@@ -11,7 +11,7 @@ export default function Navbar() {
               <div className="sr-only">Navigation Bar</div>
               <Bars3Icon className="h-6 w-6 text-black" />
             </button>
-            <div className="mr-2 tracking-wide p-2.5 rounded-lg bg-black text-white text-sm font-bold ">
+            <div className="mr-2 tracking-wide p-2 rounded-lg bg-black text-white text-base font-bold ">
               HCK
             </div>
             <div className="hidden md:block w-full max-w-[300px]">
