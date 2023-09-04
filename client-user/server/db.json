@@ -1,0 +1,30 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "Why every startup should be built on open-source... 🤔🤔",
+            "slug": "why-every-startup-should-be-built-on-open-source",
+            "content": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae provident, mollitia laudantium dolorum consectetur debitis iusto ipsum aperiam aliquam? Maiores odio minus veritatis voluptatem facere quasi necessitatibus ut voluptatibus sapiente!",
+            "imgUrl": "https://res.cloudinary.com/practicaldev/image/fetch/s--EZFPG4_i--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/30uo500ajvfh3td06kp6.png",
+            "createdAt": "Mon Sep 04 2023 15:32:26 GMT+0700 (Indochina Time)",
+            "updatedAt": "Mon Sep 04 2023 15:32:26 GMT+0700 (Indochina Time)",
+            "categoryId": "1",
+            "authorId": "1"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "Sports",
+            "createdAt": "Mon Sep 04 2023 15:32:26 GMT+0700 (Indochina Time)",
+            "updatedAt": "Mon Sep 04 2023 15:32:26 GMT+0700 (Indochina Time)"
+        }
+    ],
+    "tags": [
+        {
+            "id": 1,
+            "body": "some tags",
+            "postId": 1
+        }
+    ]
+}

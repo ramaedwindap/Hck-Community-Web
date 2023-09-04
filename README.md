@@ -26,8 +26,8 @@ Target:
 - [ ] Membuat server (json-server)
 - [ ] Membuat react app untuk client-user (Styling)
 - [ ] Membuat react app untuk client-admin (CRUD)
-- [ ] Menentukan Thema Aplikasi
-- [ ] Menentukan Design dan pemilihan CSS Framework
+- [x] Menentukan Thema Aplikasi
+- [x] Menentukan Design dan pemilihan CSS Framework
 
 **Report:**
 
