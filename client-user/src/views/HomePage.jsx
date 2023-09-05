@@ -14,6 +14,11 @@ export default function HomePage() {
         "http://localhost:3000/posts?_expand=author&_embed=tags&_expand=category",
         { method: "GET" }
       );
+
+      if (!response.ok) {
+        throw await response.json();
+      }
+
       setPosts(await response.json());
     } catch (error) {
       console.log(error);
