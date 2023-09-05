@@ -9,14 +9,13 @@ import { useParams } from "react-router-dom";
 
 export default function PostPage() {
   const [post, setPost] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { slug } = useParams();
 
   // console.log(slug);
 
   async function fetchPost() {
     try {
-      setLoading(true);
       const response = await fetch(
         `http://localhost:3000/posts?slug=${slug}&&_expand=author&&_expand=category&&_embed=tags`,
         { method: "GET" }

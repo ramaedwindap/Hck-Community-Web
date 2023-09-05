@@ -5,11 +5,10 @@ import Rightbar from "../components/Rightbar";
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   async function fetchPosts() {
     try {
-      setLoading(true);
       const response = await fetch(
         "http://localhost:3000/posts?_expand=author&_embed=tags&_expand=category",
         { method: "GET" }
