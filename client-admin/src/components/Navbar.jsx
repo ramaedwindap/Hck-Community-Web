@@ -15,12 +15,6 @@ export default function Navbar() {
               HCK
             </div>
           </div>
-          <a
-            href="#"
-            className="px-3 py-2 text-sm font-medium text-blue-800 border border-blue-800 rounded-lg hover:bg-blue-600 hover:text-white hover:underline"
-          >
-            Login
-          </a>
         </div>
       </div>
     </header>
