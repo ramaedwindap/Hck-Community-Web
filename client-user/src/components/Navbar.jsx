@@ -1,5 +1,6 @@
 import React from "react";
 import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -7,13 +8,16 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl xl:px-8">
         <div className="flex items-center justify-between w-full px-4 py-2 sm:px-6 lg:px-8 xl:px-0">
           <div className="flex items-center">
-            <button className="md:hidden mr-2 p-2 rounded-lg hover:bg-slate-300">
+            <button className="p-2 mr-2 rounded-lg md:hidden hover:bg-slate-300">
               <div className="sr-only">Navigation Bar</div>
-              <Bars3Icon className="h-6 w-6 text-black" />
+              <Bars3Icon className="w-6 h-6 text-black" />
             </button>
-            <div className="mr-2 tracking-wide p-2 rounded-lg bg-black text-white text-base font-bold ">
+            <Link
+              to="/"
+              className="p-2 mr-2 text-base font-bold tracking-wide text-white bg-black rounded-lg "
+            >
               HCK
-            </div>
+            </Link>
             <div className="hidden md:block w-full max-w-[300px]">
               <div className="relative">
                 <label htmlFor="Search" className="sr-only">
@@ -28,7 +32,7 @@ export default function Navbar() {
                   className="w-full border rounded-lg border-gray-200 py-2.5 pl-3 pe-10 shadow-sm sm:text-sm"
                 />
 
-                <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
+                <span className="absolute inset-y-0 grid w-10 end-0 place-content-center">
                   <div className="text-gray-600 hover:text-gray-700">
                     <span className="sr-only">Search</span>
 
@@ -38,7 +42,7 @@ export default function Navbar() {
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="h-4 w-4"
+                      className="w-4 h-4"
                     >
                       <path
                         strokeLinecap="round"
@@ -54,16 +58,16 @@ export default function Navbar() {
           <div className="flex items-center space-x-2">
             <a
               href="#"
-              className="hidden md:block px-3 py-2 font-medium rounded-lg text-sm hover:underline hover:bg-blue-50 border border-white hover:border-blue-50 hover:text-blue-800"
+              className="hidden px-3 py-2 text-sm font-medium border border-white rounded-lg md:block hover:underline hover:bg-blue-50 hover:border-blue-50 hover:text-blue-800"
             >
               Log in
             </a>
-            <button className="md:hidden p-2 rounded-lg hover:bg-slate-300">
-              <MagnifyingGlassIcon className="h-5 w-5 text-black" />
+            <button className="p-2 rounded-lg md:hidden hover:bg-slate-300">
+              <MagnifyingGlassIcon className="w-5 h-5 text-black" />
             </button>
             <a
               href="#"
-              className="border border-blue-800 text-blue-800 px-3 py-2 text-sm rounded-lg hover:bg-blue-600 hover:text-white font-medium hover:underline"
+              className="px-3 py-2 text-sm font-medium text-blue-800 border border-blue-800 rounded-lg hover:bg-blue-600 hover:text-white hover:underline"
             >
               Create Account
             </a>

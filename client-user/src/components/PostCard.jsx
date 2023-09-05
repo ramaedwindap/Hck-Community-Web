@@ -1,5 +1,6 @@
 import React from "react";
 import { BookmarkIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 export default function PostCard(props) {
   //   console.log(post);
@@ -8,11 +9,13 @@ export default function PostCard(props) {
   return (
     <div>
       <article className="-mx-4 overflow-hidden bg-white border border-gray-100 shadow-sm sm:rounded-2xl sm:mx-0">
-        <img
-          src={post?.imgUrl}
-          alt={post?.title}
-          className="object-cover w-full h-56"
-        />
+        <Link to={"/posts/" + post?.slug}>
+          <img
+            src={post?.imgUrl}
+            alt={post?.title}
+            className="object-cover w-full h-56"
+          />
+        </Link>
 
         <div className="p-4 sm:p-6">
           <div className="flex items-center gap-4 mb-4">
@@ -31,11 +34,11 @@ export default function PostCard(props) {
             </div>
           </div>
 
-          <a href="#">
+          <Link to={"/posts/" + post?.slug}>
             <p className="text-3xl font-bold text-gray-900 pl-14 line-clamp-2">
               {post?.title}
             </p>
-          </a>
+          </Link>
 
           <div className="flex flex-wrap gap-2 py-2 pl-14">
             {post?.tags?.map((tag) => {
