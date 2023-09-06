@@ -4,32 +4,42 @@ import {
   FolderOpenIcon,
   IdentificationIcon,
   UserCircleIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
-import React from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import Title from "../components/Title";
-import Table from "../components/Table";
-import Sidebar from "../components/Sidebar";
+import PostTable from "../components/PostTable";
+import { useEffect, useState } from "react";
 
 export default function Dashboard() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  async function fetchPosts() {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/posts?_expand=author&_embed=tags&_expand=category",
+        { method: "GET" }
+      );
+      const result = await response.json();
+      setPosts(result);
+      // console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
-    <div className="relative grid grid-cols-12 p-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div className="col-span-12 col-start-0">
-        <div className="flex flex-row">
-          {/* SIDEBAR */}
-          <Sidebar />
-          {/* CONTENT */}
-          <div className="flex mt-7 flex-col w-full space-y-2 h-[1000px]">
-            <div className="w-full p-4 bg-white border shadow-lg rounded-2xl">
-              <Title>
-                <CommandLineIcon />
-                Dashboard
-              </Title>
-              <div className="relative mt-4 overflow-x-auto border rounded-lg ">
-                <Table />
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="w-full p-4 bg-white border shadow-lg rounded-2xl">
+      <Title>
+        <CommandLineIcon />
+        Dashboard
+      </Title>
+      <div className="relative mt-4 overflow-x-auto border rounded-lg ">
+        <PostTable />
       </div>
     </div>
   );

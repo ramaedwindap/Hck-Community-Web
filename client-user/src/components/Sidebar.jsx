@@ -2,9 +2,9 @@ import React from "react";
 
 export default function Sidebar() {
   return (
-    <div className="hidden md:block w-[260px] shrink-0 mr-4">
-      <div className="border border-slate-100 shadow-sm bg-white rounded-xl p-4">
-        <div className="mb-5 font-bold text-xl text-slate-900">
+    <>
+      <div className="p-4 bg-white border shadow-sm border-slate-100 rounded-xl">
+        <div className="mb-5 text-lg font-bold text-slate-900">
           HCK Community is a community of 1,133,658 amazing developers
         </div>
         <div className="mb-5">
@@ -12,16 +12,16 @@ export default function Sidebar() {
           careers.
         </div>
         <div>
-          <button className="w-full hover:underline mb-1 border border-blue-500 text-sm px-3 py-2 rounded-lg text-center text-blue-600 hover:text-white font-semibold hover:bg-blue-600">
+          <button className="w-full px-3 py-2 mb-1 text-sm font-semibold text-center text-blue-600 border border-blue-500 rounded-lg hover:underline hover:text-white hover:bg-blue-600">
             Create account
           </button>
-          <button className="w-full hover:underline hover:bg-blue-50 px-3 py-2 text-sm rounded-lg hover:text-blue-600 text-center">
+          <button className="w-full px-3 py-2 text-sm text-center rounded-lg hover:underline hover:bg-blue-50 hover:text-blue-600">
             Log in
           </button>
         </div>
       </div>
       <div className="mt-5">
-        <button className="w-full hover:underline mb-1 px-3 py-2 flex rounded-lg text-slate-800 hover:text-blue-800 hover:bg-blue-100">
+        <button className="flex w-full px-3 py-2 mb-1 rounded-lg hover:underline text-slate-800 hover:text-blue-800 hover:bg-blue-100">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 44 44"
@@ -57,7 +57,7 @@ export default function Sidebar() {
           </svg>{" "}
           Home
         </button>
-        <button className="w-full hover:underline mb-1 px-3 py-2 flex rounded-lg text-slate-800 hover:text-blue-800 hover:bg-blue-100">
+        <button className="flex w-full px-3 py-2 mb-1 rounded-lg hover:underline text-slate-800 hover:text-blue-800 hover:bg-blue-100">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 44 44"
@@ -83,6 +83,6 @@ export default function Sidebar() {
           Tags
         </button>
       </div>
-    </div>
+    </>
   );
 }
