@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import Sidebar from "../components/Sidebar";
 import Rightbar from "../components/Rightbar";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function HomePage() {
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.postReducer);
 
   async function fetchPosts() {
     try {
@@ -15,10 +18,12 @@ export default function HomePage() {
       );
 
       if (!response.ok) {
-        throw await response.json();
+        throw new Error("Something wrong!");
       }
 
-      setPosts(await response.json());
+      const result = await response.json();
+
+      dispatch({ type: "posts/fetchSuccess", payload: result });
     } catch (error) {
       console.log(error);
     } finally {

@@ -6,13 +6,16 @@ import {
   HeartIcon,
 } from "@heroicons/react/24/outline";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function PostPage() {
-  const [post, setPost] = useState({});
+  // const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const { slug } = useParams();
+  const dispatch = useDispatch();
+  const { post } = useSelector((state) => state.postReducer);
 
-  // console.log(slug);
+  // console.log(post);
 
   async function fetchPost() {
     try {
@@ -29,14 +32,15 @@ export default function PostPage() {
 
       // console.log(result[0]);
 
-      setPost(result[0]);
+      // setPost(result[0]);
+      dispatch({ type: "post/fetchSuccess", payload: result[0] });
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   }
-
+  // console.log(post);
   useEffect(() => {
     fetchPost();
   }, []);
