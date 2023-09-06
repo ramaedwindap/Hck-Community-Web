@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Rightbar from "../components/Rightbar";
 import {
   BookmarkIcon,
   ChatBubbleOvalLeftIcon,
@@ -7,9 +6,9 @@ import {
 } from "@heroicons/react/24/outline";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchPost } from "../store/actionCreator";
 
 export default function PostPage() {
-  // const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const { slug } = useParams();
   const dispatch = useDispatch();
@@ -17,32 +16,9 @@ export default function PostPage() {
 
   // console.log(post);
 
-  async function fetchPost() {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/posts?slug=${slug}&&_expand=author&&_expand=category&&_embed=tags`,
-        { method: "GET" }
-      );
-
-      if (!response.ok) {
-        throw await response.json();
-      }
-
-      const result = await response.json();
-
-      // console.log(result[0]);
-
-      // setPost(result[0]);
-      dispatch({ type: "post/fetchSuccess", payload: result[0] });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
   // console.log(post);
   useEffect(() => {
-    fetchPost();
+    dispatch(fetchPost(slug)).finally(setLoading(false));
   }, []);
 
   return (
