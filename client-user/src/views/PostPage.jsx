@@ -5,20 +5,19 @@ import {
   ChatBubbleOvalLeftIcon,
   HeartIcon,
 } from "@heroicons/react/24/outline";
+import { useParams } from "react-router-dom";
 
 export default function PostPage() {
   const [post, setPost] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { slug } = useParams();
 
-  useEffect(() => {
-    fetchPost();
-  }, []);
+  // console.log(slug);
 
   async function fetchPost() {
     try {
-      setLoading(true);
       const response = await fetch(
-        "http://localhost:3000/posts/1?_expand=author&_embed=tags&_expand=category",
+        `http://localhost:3000/posts?slug=${slug}&&_expand=author&&_expand=category&&_embed=tags`,
         { method: "GET" }
       );
 
@@ -26,7 +25,11 @@ export default function PostPage() {
         throw await response.json();
       }
 
-      setPost(await response.json());
+      const result = await response.json();
+
+      // console.log(result[0]);
+
+      setPost(result[0]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -34,34 +37,42 @@ export default function PostPage() {
     }
   }
 
+  useEffect(() => {
+    fetchPost();
+  }, []);
+
   return (
     <div className="relative grid grid-cols-12 p-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="col-span-12 col-start-0">
         <div className="flex flex-row">
           <div className="hidden md:block w-[65px] shrink-0 mr-4">
             <div className="sticky inset-y-[120px]">
-              <div>
-                <div className="flex flex-col items-center">
-                  <button>
-                    <HeartIcon className="w-6 h-6 text-black" />
-                  </button>
-                  <p className="mt-2 text-sm ">17</p>
-                </div>
+              {loading ? (
+                ""
+              ) : (
+                <div>
+                  <div className="flex flex-col items-center">
+                    <button>
+                      <HeartIcon className="w-6 h-6 text-black" />
+                    </button>
+                    <p className="mt-2 text-sm ">17</p>
+                  </div>
 
-                <div className="flex flex-col items-center mt-4">
-                  <button>
-                    <ChatBubbleOvalLeftIcon className="w-6 h-6 text-black" />
-                  </button>
-                  <p className="mt-2 text-sm ">17</p>
-                </div>
+                  <div className="flex flex-col items-center mt-4">
+                    <button>
+                      <ChatBubbleOvalLeftIcon className="w-6 h-6 text-black" />
+                    </button>
+                    <p className="mt-2 text-sm ">17</p>
+                  </div>
 
-                <div className="flex flex-col items-center mt-4">
-                  <button>
-                    <BookmarkIcon className="w-6 h-6 text-black" />
-                  </button>
-                  <p className="mt-2 text-sm ">17</p>
+                  <div className="flex flex-col items-center mt-4">
+                    <button>
+                      <BookmarkIcon className="w-6 h-6 text-black" />
+                    </button>
+                    <p className="mt-2 text-sm ">17</p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
           <div className="flex flex-col w-full space-y-2 lg:mr-4">
@@ -119,25 +130,29 @@ export default function PostPage() {
             )}
           </div>
           <div className="hidden lg:block w-[250px] shrink-0">
-            <div className="relative flex flex-col p-4 overflow-hidden bg-white border shadow-sm border-slate-100 rounded-xl">
-              <div className="absolute top-0 left-0 right-0 bg-black h-7"></div>
-              <div className="z-10 flex items-center gap-4 mb-4">
-                <img
-                  alt={post?.author?.username}
-                  src={`https://ui-avatars.com/api/?name=${post?.author?.username}`}
-                  className="flex-none object-cover w-10 h-10 rounded-lg"
-                />
+            {loading ? (
+              ""
+            ) : (
+              <div className="relative flex flex-col p-4 overflow-hidden bg-white border shadow-sm border-slate-100 rounded-xl">
+                <div className="absolute top-0 left-0 right-0 bg-black h-7"></div>
+                <div className="z-10 flex items-center gap-4 mb-4">
+                  <img
+                    alt={post?.author?.username}
+                    src={`https://ui-avatars.com/api/?name=${post?.author?.username}`}
+                    className="flex-none object-cover w-10 h-10 rounded-lg"
+                  />
 
-                <div className="-mb-4">
-                  <p className="text-base font-semibold line-clamp-1">
-                    {post?.author?.username}
-                  </p>
+                  <div className="-mb-4">
+                    <p className="text-base font-semibold line-clamp-1">
+                      {post?.author?.username}
+                    </p>
+                  </div>
                 </div>
+                <button className="p-2 mt-4 text-sm font-semibold text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                  Follow
+                </button>
               </div>
-              <button className="p-2 mt-4 text-sm font-semibold text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                Follow
-              </button>
-            </div>
+            )}
           </div>
         </div>
       </div>

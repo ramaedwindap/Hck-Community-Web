@@ -1,12 +1,11 @@
 import React from "react";
-import Navbar from "./components/Navbar";
-import Dashboard from "./views/Dashboard";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes";
 
 export default function App() {
   return (
     <div className="min-h-screen bg-slate-50">
-      <Navbar />
-      <Dashboard />
+      <RouterProvider router={router} />
     </div>
   );
 }

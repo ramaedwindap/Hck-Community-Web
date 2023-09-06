@@ -5,11 +5,10 @@ import Rightbar from "../components/Rightbar";
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   async function fetchPosts() {
     try {
-      setLoading(true);
       const response = await fetch(
         "http://localhost:3000/posts?_expand=author&_embed=tags&_expand=category",
         { method: "GET" }
@@ -37,7 +36,9 @@ export default function HomePage() {
     <div className="relative grid grid-cols-12 p-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="col-span-12 col-start-0">
         <div className="flex flex-row">
-          <Sidebar />
+          <div className="hidden md:block w-[260px] shrink-0 mr-4">
+            <Sidebar />
+          </div>
           <div className="flex flex-col w-full space-y-2 lg:mr-4">
             <div className="flex w-full py-2 font-semibold">
               <button className="px-3 py-2 rounded-lg hover:bg-white hover:text-blue-800">
