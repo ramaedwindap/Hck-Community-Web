@@ -6,6 +6,7 @@ import {
   HomeModernIcon,
 } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
+import Sidebar from "./Sidebar";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -85,12 +86,7 @@ export default function Navbar() {
 
                         <div className="mt-8">
                           <div className="flow-root">
-                            <Link
-                              to="/"
-                              className="flex items-center w-full px-3 py-2 rounded-lg hover:underline text-slate-800 hover:text-blue-800 hover:bg-blue-100"
-                            >
-                              <HomeModernIcon className="w-4 h-4 mr-2" /> Home
-                            </Link>
+                            <Sidebar />
                           </div>
                         </div>
                       </div>
