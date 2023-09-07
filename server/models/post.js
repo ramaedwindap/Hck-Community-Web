@@ -11,11 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Post.belongsTo(models.User, { foreignKey: "authorId" })
+      Post.belongsTo(models.Category, { foreignKey: "categoryId" })
+      Post.hasMany(models.Tag, { foreignKey: "postId" })
     }
   }
   Post.init({
     title: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Title is required!"
@@ -27,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     slug: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Slug is required!"
@@ -38,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     content: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Content is required!"

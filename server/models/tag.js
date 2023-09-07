@@ -11,12 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Tag.belongsTo(models.Post, { foreignKey: "postId" })
+
     }
   }
   Tag.init({
     postId: DataTypes.INTEGER,
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Tags name is required!"
