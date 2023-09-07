@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Post.belongsTo(models.User, { foreignKey: "authorId", as: "author" })
       Post.belongsTo(models.Category, { foreignKey: "categoryId", as: "categories" })
-      Post.hasMany(models.Tag, { foreignKey: "postId" })
+      Post.hasMany(models.Tag, { foreignKey: "postId", as: "tags" })
     }
   }
   Post.init({

@@ -1,5 +1,5 @@
 const { hashPassword, verifyPassword } = require('../helper/bcyrpt')
-const { Post, Category, User } = require('../models')
+const { Post, Category, User, Tag } = require('../models')
 const { signToken } = require('../helper/jwt')
 
 class Controller {
@@ -50,7 +50,13 @@ class Controller {
 
     static async posts(req, res, next) {
         try {
-            const posts = await Post.findAll({ include: [{ model: Category, as: "categories" }, { model: User, as: "author", attributes: { exclude: ['password'] } }] })
+            const posts = await Post.findAll({
+                include: [
+                    { model: Category, as: "categories", attributes: { exclude: ['createdAt', 'updatedAt'] } },
+                    { model: User, as: "author", attributes: { exclude: ['password'] } },
+                    { model: Tag, as: "tags", attributes: { exclude: ['createdAt', 'updatedAt'] } },
+                ]
+            })
             // console.log(posts)
             res.status(200).json(posts)
         } catch (error) {
