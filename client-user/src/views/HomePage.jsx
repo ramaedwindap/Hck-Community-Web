@@ -3,21 +3,24 @@ import PostCard from "../components/PostCard";
 import Sidebar from "../components/Sidebar";
 import Rightbar from "../components/Rightbar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../store/actionCreator";
+import { fetchPosts, fetchTopTags } from "../store/actionCreator";
 
 export default function HomePage() {
-  // const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.postReducer);
-
-  // console.log(loading ? "Loading" : "Finish");
+  const { topTags } = useSelector((state) => state.tagReducer);
 
   useEffect(() => {
     dispatch(fetchPosts()).finally(() => {
       setLoading(false);
     });
+
+    dispatch(fetchTopTags()).finally(() => {
+      console.log("success get top tags");
+    });
     // fetchPosts();
+    // fetchTopTags();
   }, []);
 
   return (
@@ -65,7 +68,7 @@ export default function HomePage() {
               })
             )}
           </div>
-          <Rightbar />
+          <Rightbar topTags={topTags} />
         </div>
       </div>
     </div>

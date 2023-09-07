@@ -1,6 +1,7 @@
 const { hashPassword, verifyPassword } = require('../helper/bcyrpt')
 const { Post, Category, User, Tag } = require('../models')
 const { signToken } = require('../helper/jwt')
+const { Sequelize } = require('sequelize')
 
 class Controller {
     static async login(req, res, next) {
@@ -89,6 +90,33 @@ class Controller {
         // }
     }
 
+
+    static async getTopTags(req, res, next) {
+        try {
+            const topTags = await Tag.findAll({
+                attributes: ['name', [Sequelize.fn('COUNT', Sequelize.col('name')), 'count_name']],
+                group: ['name'],
+                order: [[Sequelize.literal('count_name'), 'DESC']],
+                limit: 2,
+            })
+
+            // console.log(topTags)
+            let result = []
+
+            for (let i = 0; i < topTags.length; i++) {
+                const tagName = topTags[i].name;
+                // console.log(tagName)
+                const posts = await Post.findAll({ attributes: ['id', 'title', 'slug'], include: [{ model: Tag, where: { name: tagName }, as: "tags", attributes: [] }] })
+                // console.log(posts)
+                result.push({ tagName, posts })
+            }
+
+            res.status(200).json(result)
+        } catch (error) {
+            next(error)
+        }
+    }
+
     static async indexPublicPost(req, res, next) {
         try {
             const posts = await Post.findAll({
@@ -99,6 +127,7 @@ class Controller {
                 ]
             })
             // console.log(posts)
+
             res.status(200).json(posts)
         } catch (error) {
             // console.log(error)
@@ -113,8 +142,8 @@ class Controller {
             const post = await Post.findOne({
                 where: { slug },
                 include: [
-                    { model: Category, as: "categories", attributes: { exclude: ['createdAt', 'updatedAt'] } },
-                    { model: User, as: "author", attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'role', 'phoneNumber', 'address'] } },
+                    { model: Category, as: "categories", attributes: ['id', 'name'] },
+                    { model: User, as: "author", attributes: ['id', 'username', 'email'] },
                     { model: Tag, as: "tags", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                 ]
             })

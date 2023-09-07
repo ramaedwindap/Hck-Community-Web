@@ -1,10 +1,10 @@
-import { POSTS_FETCH_SUCCESS, POST_FETCH_SUCCESS } from "./actionTypes";
+import { POSTS_FETCH_SUCCESS, POST_FETCH_SUCCESS, TOP_TAGS_FETCH_SUCCESS } from "./actionTypes";
 
 export function fetchPosts() {
     return async function (dispatch) {
         try {
             const response = await fetch(
-                "http://localhost:3000/posts?_expand=author&_embed=tags&_expand=category",
+                "http://localhost:3000/public/posts",
                 { method: "GET" }
             );
 
@@ -13,6 +13,7 @@ export function fetchPosts() {
             }
 
             const result = await response.json();
+            // console.log(result, "================");
 
             dispatch({ type: POSTS_FETCH_SUCCESS, payload: result });
         } catch (error) {
@@ -25,7 +26,7 @@ export function fetchPost(slug) {
     return async function (dispatch) {
         try {
             const response = await fetch(
-                `http://localhost:3000/public/post/${slug}`,
+                `http://localhost:3000/public/posts/${slug}`,
                 { method: "GET" }
             );
 
@@ -35,8 +36,28 @@ export function fetchPost(slug) {
 
             const result = await response.json();
 
-            // console.log(result[0]);
-            dispatch({ type: POST_FETCH_SUCCESS, payload: result[0] });
+            dispatch({ type: POST_FETCH_SUCCESS, payload: result });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export function fetchTopTags() {
+    return async function (dispatch) {
+        try {
+            const response = await fetch("http://localhost:3000/public/top-tags", {
+                method: "GET",
+            });
+
+            if (!response.ok) {
+                throw await response.json();
+            }
+
+            const result = await response.json()
+            // console.log(result, "asdadadasd============")
+
+            dispatch({ type: TOP_TAGS_FETCH_SUCCESS, payload: result });
         } catch (error) {
             console.log(error);
         }
