@@ -1,3 +1,4 @@
+import { POSTS_FETCH_SUCCESS, POST_FETCH_SUCCESS } from "./actionTypes";
 
 export function fetchPosts() {
     return async function (dispatch) {
@@ -13,7 +14,7 @@ export function fetchPosts() {
 
             const result = await response.json();
 
-            dispatch({ type: "posts/fetchSuccess", payload: result });
+            dispatch({ type: POSTS_FETCH_SUCCESS, payload: result });
         } catch (error) {
             console.log(error);
         }
@@ -35,7 +36,7 @@ export function fetchPost(slug) {
             const result = await response.json();
 
             // console.log(result[0]);
-            dispatch({ type: "post/fetchSuccess", payload: result[0] });
+            dispatch({ type: POST_FETCH_SUCCESS, payload: result[0] });
         } catch (error) {
             console.log(error);
         }

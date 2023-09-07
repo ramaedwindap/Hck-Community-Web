@@ -18,7 +18,9 @@ export default function PostPage() {
 
   // console.log(post);
   useEffect(() => {
-    dispatch(fetchPost(slug)).finally(setLoading(false));
+    dispatch(fetchPost(slug)).finally(() => {
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -63,7 +65,7 @@ export default function PostPage() {
                 <img
                   src={post?.imgUrl}
                   alt={post?.title}
-                  className="object-cover w-full h-[300px]"
+                  className="object-cover w-full min-h-[300px] max-h-[400px]"
                 />
 
                 <div className="p-4 sm:p-6">
@@ -89,7 +91,7 @@ export default function PostPage() {
                     {post?.title}
                   </p>
 
-                  <div className="flex flex-wrap py-2 pl-14">
+                  <div className="flex flex-wrap py-2 pl-11">
                     {post?.tags?.map((tag) => {
                       return (
                         <button
@@ -102,7 +104,7 @@ export default function PostPage() {
                     })}
                   </div>
 
-                  <p className="mt-5 text-base text-gray-900 pl-14">
+                  <p className="my-5 text-base text-gray-900 pl-14">
                     {post?.content}
                   </p>
                 </div>
