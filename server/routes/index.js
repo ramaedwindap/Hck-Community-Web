@@ -13,11 +13,13 @@ router.post('/login', Controller.login)
 
 router.post('/add-user', authentication, Controller.addUser)
 
-router.get('/posts', authentication, Controller.getPost)
+router.get('/posts', authentication, Controller.indexPost)
 
 router.post('/posts', authentication, Controller.storePost)
 
 router.put('/posts/:id', authentication, Controller.updatePost)
+
+router.get('/public/posts', Controller.indexPublicPost)
 
 router.get('/public/posts/:slug', Controller.showPublicPost)
 // router.delete('/posts/:id', authentication, Controller.destroyPost)

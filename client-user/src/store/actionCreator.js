@@ -9,7 +9,7 @@ export function fetchPosts() {
             );
 
             if (!response.ok) {
-                throw new Error("Something wrong!");
+                throw { message: "Something wrong!" };
             }
 
             const result = await response.json();
@@ -25,7 +25,7 @@ export function fetchPost(slug) {
     return async function (dispatch) {
         try {
             const response = await fetch(
-                `http://localhost:3000/posts?slug=${slug}&&_expand=author&&_expand=category&&_embed=tags`,
+                `http://localhost:3000/public/post/${slug}`,
                 { method: "GET" }
             );
 

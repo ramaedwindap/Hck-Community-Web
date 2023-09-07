@@ -48,7 +48,7 @@ class Controller {
         }
     }
 
-    static async getPost(req, res, next) {
+    static async indexPost(req, res, next) {
         try {
             const posts = await Post.findAll({
                 include: [
@@ -87,6 +87,23 @@ class Controller {
         // } catch (error) {
         //     next(error)
         // }
+    }
+
+    static async indexPublicPost(req, res, next) {
+        try {
+            const posts = await Post.findAll({
+                include: [
+                    { model: Category, as: "categories", attributes: { exclude: ['createdAt', 'updatedAt'] } },
+                    { model: User, as: "author", attributes: { exclude: ['password'] } },
+                    { model: Tag, as: "tags", attributes: { exclude: ['createdAt', 'updatedAt'] } },
+                ]
+            })
+            // console.log(posts)
+            res.status(200).json(posts)
+        } catch (error) {
+            // console.log(error)
+            next(error)
+        }
     }
 
     static async showPublicPost(req, res, next) {
