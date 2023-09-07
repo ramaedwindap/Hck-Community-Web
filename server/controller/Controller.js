@@ -106,7 +106,7 @@ class Controller {
             for (let i = 0; i < topTags.length; i++) {
                 const tagName = topTags[i].name;
                 // console.log(tagName)
-                const posts = await Post.findAll({ attributes: ['id', 'title', 'slug'], include: [{ model: Tag, where: { name: tagName }, as: "tags", attributes: [] }] })
+                const posts = await Post.findAll({ attributes: ['id', 'title', 'slug', 'content'], include: [{ model: Tag, where: { name: tagName }, as: "tags", attributes: [] }] })
                 // console.log(posts)
                 result.push({ tagName, posts })
             }

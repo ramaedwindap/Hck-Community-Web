@@ -7,6 +7,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPost } from "../store/actionCreator";
+import convertDate from "../../helper/convertDate";
 
 export default function PostPage() {
   const [loading, setLoading] = useState(true);
@@ -82,7 +83,9 @@ export default function PostPage() {
                       </p>
 
                       <div className="flow-root">
-                        <p className="text-sm">{post?.createdAt}</p>
+                        <p className="text-sm">
+                          {convertDate(post?.createdAt)}
+                        </p>
                       </div>
                     </div>
                   </div>

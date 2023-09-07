@@ -1,6 +1,8 @@
 import React from "react";
 import { BookmarkIcon, PaperClipIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import readingTime from "../../helper/readingTime";
+import convertDate from "../../helper/convertDate";
 
 export default function PostCard(props) {
   //   console.log(post);
@@ -29,7 +31,7 @@ export default function PostCard(props) {
               <p className="text-sm font-semibold">{post?.author?.username}</p>
 
               <div className="flow-root">
-                <p className="text-sm">{post?.createdAt}</p>
+                <p className="text-sm">{convertDate(post?.createdAt)}</p>
               </div>
             </div>
           </div>
@@ -73,7 +75,7 @@ export default function PostCard(props) {
           </div>
 
           <p className="flex items-center justify-end gap-1 mt-4 text-xs font-medium group text-slate-700">
-            {post?.estimateRead} min read
+            {readingTime(post?.content)} min read
             <button>
               <BookmarkIcon className="w-4 h-4 ml-2 text-black" />
             </button>

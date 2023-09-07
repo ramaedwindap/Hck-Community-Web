@@ -1,6 +1,7 @@
 import { BookmarkIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import React from "react";
+import readingTime from "../../helper/readingTime";
 
 export default function Rightbar({ topTags }) {
   return (
@@ -21,7 +22,7 @@ export default function Rightbar({ topTags }) {
               >
                 <Link to={`/posts/${post.slug}`}>{post.title}</Link>
                 <p className="flex items-center justify-end gap-1 mt-4 text-xs font-medium group text-slate-700">
-                  5 min read
+                  {readingTime(post?.content)} min read
                   <button>
                     <BookmarkIcon className="w-4 h-4 ml-2 text-black" />
                   </button>
