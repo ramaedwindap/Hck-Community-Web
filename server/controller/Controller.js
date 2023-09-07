@@ -48,7 +48,7 @@ class Controller {
         }
     }
 
-    static async posts(req, res, next) {
+    static async getPost(req, res, next) {
         try {
             const posts = await Post.findAll({
                 include: [
@@ -61,6 +61,51 @@ class Controller {
             res.status(200).json(posts)
         } catch (error) {
             // console.log(error)
+            next(error)
+        }
+    }
+
+    static async storePost(req, res, next) {
+        // try {
+
+        // } catch (error) {
+        //     next(error)
+        // }
+    }
+
+    static async updatePost(req, res, next) {
+        // try {
+
+        // } catch (error) {
+        //     next(error)
+        // }
+    }
+
+    static async destoryPost(req, res, next) {
+        // try {
+
+        // } catch (error) {
+        //     next(error)
+        // }
+    }
+
+    static async showPublicPost(req, res, next) {
+        try {
+            const { slug } = req.params
+
+            const post = await Post.findOne({
+                where: { slug },
+                include: [
+                    { model: Category, as: "categories", attributes: { exclude: ['createdAt', 'updatedAt'] } },
+                    { model: User, as: "author", attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'role', 'phoneNumber', 'address'] } },
+                    { model: Tag, as: "tags", attributes: { exclude: ['createdAt', 'updatedAt'] } },
+                ]
+            })
+
+            if (!post) throw { name: "notFound" }
+
+            res.status(200).json(post)
+        } catch (error) {
             next(error)
         }
     }
