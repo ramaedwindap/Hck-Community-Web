@@ -35,12 +35,12 @@ export default function PostCard(props) {
           </div>
 
           <Link to={"/posts/" + post?.slug}>
-            <p className="text-3xl font-bold text-gray-900 pl-14 line-clamp-2">
+            <p className="text-xl font-bold text-gray-900 md:text-2xl lg:text-3xl pl-14 line-clamp-2">
               {post?.title}
             </p>
           </Link>
 
-          <div className="flex flex-wrap gap-2 py-2 pl-14">
+          <div className="flex flex-wrap py-2 pl-11">
             {post?.tags?.map((tag) => {
               return (
                 <button

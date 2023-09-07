@@ -1,12 +1,4 @@
-import {
-  ArrowLeftOnRectangleIcon,
-  CommandLineIcon,
-  FolderOpenIcon,
-  IdentificationIcon,
-  UserCircleIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { Dialog, Transition } from "@headlessui/react";
+import { CommandLineIcon } from "@heroicons/react/24/outline";
 import Title from "../components/Title";
 import PostTable from "../components/PostTable";
 import { useEffect, useState } from "react";
@@ -17,6 +9,8 @@ export default function Dashboard() {
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  // console.log(posts);
 
   async function fetchPosts() {
     try {
@@ -33,13 +27,13 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="w-full p-4 bg-white border shadow-lg rounded-2xl">
+    <div className="w-full p-4 bg-white border shadow-lg rounded-2xl min-h-[500px]">
       <Title>
         <CommandLineIcon />
         Dashboard
       </Title>
-      <div className="relative mt-4 overflow-x-auto border rounded-lg ">
-        <PostTable />
+      <div className="relative mt-4 overflow-x-auto border rounded-lg">
+        <PostTable posts={posts} />
       </div>
     </div>
   );

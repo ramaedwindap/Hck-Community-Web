@@ -2,34 +2,22 @@ import React, { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import Sidebar from "../components/Sidebar";
 import Rightbar from "../components/Rightbar";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "../store/actionCreator";
 
 export default function HomePage() {
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  async function fetchPosts() {
-    try {
-      const response = await fetch(
-        "http://localhost:3000/posts?_expand=author&_embed=tags&_expand=category",
-        { method: "GET" }
-      );
-
-      if (!response.ok) {
-        throw await response.json();
-      }
-
-      setPosts(await response.json());
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.postReducer);
 
   // console.log(loading ? "Loading" : "Finish");
 
   useEffect(() => {
-    fetchPosts();
+    dispatch(fetchPosts()).finally(() => {
+      setLoading(false);
+    });
+    // fetchPosts();
   }, []);
 
   return (

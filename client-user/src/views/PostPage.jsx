@@ -1,44 +1,26 @@
 import React, { useEffect, useState } from "react";
-import Rightbar from "../components/Rightbar";
 import {
   BookmarkIcon,
   ChatBubbleOvalLeftIcon,
   HeartIcon,
 } from "@heroicons/react/24/outline";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPost } from "../store/actionCreator";
 
 export default function PostPage() {
-  const [post, setPost] = useState({});
   const [loading, setLoading] = useState(true);
   const { slug } = useParams();
+  const dispatch = useDispatch();
+  const { post } = useSelector((state) => state.postReducer);
 
-  // console.log(slug);
+  // console.log(post);
 
-  async function fetchPost() {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/posts?slug=${slug}&&_expand=author&&_expand=category&&_embed=tags`,
-        { method: "GET" }
-      );
-
-      if (!response.ok) {
-        throw await response.json();
-      }
-
-      const result = await response.json();
-
-      // console.log(result[0]);
-
-      setPost(result[0]);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
+  // console.log(post);
   useEffect(() => {
-    fetchPost();
+    dispatch(fetchPost(slug)).finally(() => {
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -83,7 +65,7 @@ export default function PostPage() {
                 <img
                   src={post?.imgUrl}
                   alt={post?.title}
-                  className="object-cover w-full h-[300px]"
+                  className="object-cover w-full min-h-[300px] max-h-[400px]"
                 />
 
                 <div className="p-4 sm:p-6">
@@ -109,7 +91,7 @@ export default function PostPage() {
                     {post?.title}
                   </p>
 
-                  <div className="flex flex-wrap py-2 pl-14">
+                  <div className="flex flex-wrap py-2 pl-11">
                     {post?.tags?.map((tag) => {
                       return (
                         <button
@@ -122,7 +104,7 @@ export default function PostPage() {
                     })}
                   </div>
 
-                  <p className="mt-5 text-base text-gray-900 pl-14">
+                  <p className="my-5 text-base text-gray-900 pl-14">
                     {post?.content}
                   </p>
                 </div>
