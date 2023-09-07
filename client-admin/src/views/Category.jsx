@@ -5,6 +5,7 @@ import CategoryTable from "../components/CategoryTable";
 
 export default function Category() {
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchCategories();
@@ -20,6 +21,7 @@ export default function Category() {
       const result = await response.json();
       setCategories(result);
       // console.log(result);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -31,9 +33,13 @@ export default function Category() {
         <FolderOpenIcon />
         Categories
       </Title>
-      <div className="relative mt-4 overflow-x-auto border rounded-lg ">
-        <CategoryTable categories={categories} />
-      </div>
+      {loading ? (
+        <div className="mt-5 text-center">Loading..</div>
+      ) : (
+        <div className="relative mt-4 overflow-x-auto border rounded-lg ">
+          <CategoryTable categories={categories} />
+        </div>
+      )}
     </div>
   );
 }

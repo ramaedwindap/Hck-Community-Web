@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchPosts();
@@ -20,6 +21,7 @@ export default function Dashboard() {
       );
       const result = await response.json();
       setPosts(result);
+      setLoading(false);
       // console.log(result);
     } catch (error) {
       console.log(error);
@@ -32,9 +34,13 @@ export default function Dashboard() {
         <CommandLineIcon />
         Dashboard
       </Title>
-      <div className="relative mt-4 overflow-x-auto border rounded-lg">
-        <PostTable posts={posts} />
-      </div>
+      {loading ? (
+        <div className="mt-5 text-center">Loading..</div>
+      ) : (
+        <div className="relative mt-4 overflow-x-auto border rounded-lg">
+          <PostTable posts={posts} />
+        </div>
+      )}
     </div>
   );
 }
