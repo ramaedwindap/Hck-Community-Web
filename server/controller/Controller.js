@@ -99,7 +99,7 @@ class Controller {
             // console.log(dataTags)
             await Tag.bulkCreate(dataTags, { transaction })
 
-            res.status(200).json({ message: `Success add new post with id ${storePost.id}` })
+            res.status(201).json({ message: `Success add new post with id ${storePost.id}` })
 
             await transaction.commit();
         } catch (error) {
@@ -237,6 +237,66 @@ class Controller {
             if (!post) throw { name: "notFound" }
 
             res.status(200).json(post)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async indexCategory(req, res, next) {
+        try {
+            const categories = await Category.findAll()
+
+            res.status(200).json(categories)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async storeCategory(req, res, next) {
+        try {
+            const { name } = req.body
+
+            const storeCategory = await Category.create({ name })
+
+            res.status(201).json({ message: `Success add new category '${name}' with id ${storeCategory.id}` })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async updateCategory(req, res, next) {
+        try {
+            const { id } = req.params
+            const { name } = req.body
+
+            const foundCategory = await Category.findByPk(id)
+
+            // console.log(foundCategory)
+            if (!foundCategory) throw { name: "notFound" }
+
+            const oldName = foundCategory.name
+
+            await foundCategory.update({ name })
+
+            res.status(200).json({ message: `Success update category name ${oldName} to ${name}` })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async destroyCategory(req, res, next) {
+        try {
+            const { id } = req.params
+
+            const foundCategory = await Category.findByPk(id)
+
+            if (!foundCategory) throw { name: "notFound" }
+
+            const categoryName = foundCategory.name
+
+            await foundCategory.destroy({ where: { id } })
+
+            res.status(200).json({ name: `Success delete category name ${categoryName}` })
         } catch (error) {
             next(error)
         }

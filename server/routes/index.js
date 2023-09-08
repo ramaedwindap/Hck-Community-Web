@@ -11,21 +11,35 @@ router.get('/', (req, res) => {
 
 router.post('/login', Controller.login)
 
-router.get('/public/posts', Controller.indexPublicPost)
-
+// Tags (Public)
 router.get('/public/top-tags', Controller.getTopTags)
+
+// Post (Public)
+router.get('/public/posts', Controller.indexPublicPost)
 
 router.get('/public/posts/:slug', Controller.showPublicPost)
 
-router.post('/add-user', authentication, Controller.addUser)
+router.use(authentication)
+// Add User (Admin)
+router.post('/add-user', Controller.addUser)
 
-router.get('/posts', authentication, Controller.indexPost)
+//Post (Admin)
+router.get('/posts', Controller.indexPost)
 
-router.post('/posts', authentication, Controller.storePost)
+router.post('/posts', Controller.storePost)
 
-router.put('/posts/:id', authentication, Controller.updatePost)
+router.put('/posts/:id', Controller.updatePost)
 
-router.delete('/posts/:id', authentication, Controller.destroyPost)
+router.delete('/posts/:id', Controller.destroyPost)
+
+// Category (Admin)
+router.get('/categories', Controller.indexCategory)
+
+router.post('/categories', Controller.storeCategory)
+
+router.put('/categories/:id', Controller.updateCategory)
+
+router.delete('/categories/:id', Controller.destroyCategory)
 
 router.use(errorHandler)
 
