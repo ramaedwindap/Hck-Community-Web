@@ -97,7 +97,7 @@ class Controller {
             if (dataTags.length < 3) throw { name: "tagMinimun" }
 
             // console.log(dataTags)
-            await Tag.bulkCreate(dataTags, { transaction: transaction })
+            await Tag.bulkCreate(dataTags, { transaction })
 
             res.status(200).json({ message: `Success add new post with id ${storePost.id}` })
 
@@ -109,19 +109,68 @@ class Controller {
     }
 
     static async updatePost(req, res, next) {
-        // try {
+        const transaction = await sequelize.transaction();
+        const { title, content, imgUrl, tags, categoryId } = req.body
+        try {
+            const { id } = req.params
+            // console.log(id)
+            const foundPost = await Post.findByPk(id)
 
-        // } catch (error) {
-        //     next(error)
-        // }
+            if (!foundPost) throw { name: "notFound" }
+
+            if (!tags) throw { name: "tagRequired" }
+
+            await Tag.destroy({
+                where: {
+                    postId: foundPost.id
+                },
+            }, { transaction });
+
+            const tagArr = tags.replaceAll(/\s/g, '').split('#')
+
+            await Post.update({ title, content, imgUrl, categoryId }, { where: { id: foundPost.id } }, { transaction })
+
+            const dataTags = []
+
+            tagArr.forEach(tag => {
+                if (tag !== "") {
+                    dataTags.push({
+                        postId: id,
+                        name: tag
+                    })
+                }
+            });
+
+            if (dataTags.length < 3) throw { name: "tagMinimun" }
+
+            // console.log(dataTags)
+            await Tag.bulkCreate(dataTags, { transaction })
+
+            res.status(200).json({ message: `Success update post with id ${id}` })
+
+            await transaction.commit();
+        } catch (error) {
+            await transaction.rollback();
+            next(error)
+        }
     }
 
-    static async destoryPost(req, res, next) {
-        // try {
+    static async destroyPost(req, res, next) {
+        try {
+            const { id } = req.params
+            // console.log(id)
+            const foundPost = await Post.findByPk(id)
 
-        // } catch (error) {
-        //     next(error)
-        // }
+            if (!foundPost) throw { name: "notFound" }
+
+            await Post.destroy({
+                where: { id }
+            });
+
+            res.status(200).json({ message: `Success delete post id ${id}` })
+        } catch (error) {
+            next(error)
+        }
     }
 
 
@@ -140,7 +189,11 @@ class Controller {
             for (let i = 0; i < topTags.length; i++) {
                 const tagName = topTags[i].name;
                 // console.log(tagName)
-                const posts = await Post.findAll({ attributes: ['id', 'title', 'slug', 'content'], include: [{ model: Tag, where: { name: tagName }, as: "tags", attributes: [] }] })
+                const posts = await Post.findAll({
+                    attributes: ['id', 'title', 'slug', 'content'],
+                    include: [{ model: Tag, where: { name: tagName }, as: "tags", attributes: [] }],
+                    limit: 5
+                })
                 // console.log(posts)
                 result.push({ tagName, posts })
             }
@@ -160,7 +213,6 @@ class Controller {
                     { model: Tag, as: "tags", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                 ]
             })
-            console.log(hashPassword('12345'))
 
             res.status(200).json(posts)
         } catch (error) {

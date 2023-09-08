@@ -25,7 +25,7 @@ router.post('/posts', authentication, Controller.storePost)
 
 router.put('/posts/:id', authentication, Controller.updatePost)
 
-// router.delete('/posts/:id', authentication, Controller.destroyPost)
+router.delete('/posts/:id', authentication, Controller.destroyPost)
 
 router.use(errorHandler)
 
