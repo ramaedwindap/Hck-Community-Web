@@ -3,7 +3,6 @@
 /** @type {import('sequelize-cli').Migration} */
 const User = [
   {
-    "id": 1,
     "username": "ramaedwindap",
     "email": "ramaedwindap@gmail.com",
     "password": "12345",
@@ -22,27 +21,21 @@ const dataUser = User.map((e) => {
 
 const dataCategory = [
   {
-    "id": 1,
     "name": "Sports"
   },
   {
-    "id": 2,
     "name": "Technology"
   },
   {
-    "id": 3,
     "name": "Travel"
   },
   {
-    "id": 4,
     "name": "Food & Drink"
   },
   {
-    "id": 5,
     "name": "Entertainment"
   },
   {
-    "id": 6,
     "name": "Health & Wellness"
   }
 ].map((e) => {
@@ -55,7 +48,6 @@ const dataCategory = [
 
 const dataPost = [
   {
-    "id": 1,
     "title": "Why every startup should be built on open-source... 🤔🤔",
     "slug": "why-every-startup-should-be-built-on-open-source",
     "content": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae provident, mollitia laudantium dolorum consectetur debitis iusto ipsum aperiam aliquam? Maiores odio minus veritatis voluptatem facere quasi necessitatibus ut voluptatibus sapiente!",
@@ -64,7 +56,6 @@ const dataPost = [
     "authorId": "1"
   },
   {
-    "id": 2,
     "title": "Embracing the Power of AI in Everyday Life",
     "slug": "embracing-ai-in-everyday-life",
     "content": "Artificial Intelligence has woven itself into the fabric...",
@@ -73,7 +64,6 @@ const dataPost = [
     "authorId": "1"
   },
   {
-    "id": 3,
     "title": "A Deep Dive into Quantum Computing",
     "slug": "deep-dive-into-quantum-computing",
     "content": "Quantum computers could revolutionize areas...",
@@ -82,7 +72,6 @@ const dataPost = [
     "authorId": "1"
   },
   {
-    "id": 4,
     "title": "The Future of Virtual Reality in Gaming",
     "slug": "future-of-vr-in-gaming",
     "content": "The world of virtual reality gaming is expanding...",
@@ -91,7 +80,6 @@ const dataPost = [
     "authorId": "1"
   },
   {
-    "id": 5,
     "title": "Role of Big Data in Modern Business Decisions",
     "slug": "role-of-big-data-in-business",
     "content": "Businesses today rely heavily on data-driven decisions...",
@@ -100,7 +88,6 @@ const dataPost = [
     "authorId": "1"
   },
   {
-    "id": 6,
     "title": "The Impact of Blockchain Beyond Cryptocurrencies",
     "slug": "impact-of-blockchain-beyond-crypto",
     "content": "While most know blockchain for its role in cryptocurrencies...",
@@ -118,47 +105,38 @@ const dataPost = [
 
 const dataTag = [
   {
-    "id": 1,
     "name": "beginners",
     "postId": 5
   },
   {
-    "id": 2,
     "name": "career",
     "postId": 1
   },
   {
-    "id": 3,
     "name": "discuss",
     "postId": 3
   },
   {
-    "id": 4,
     "name": "ai",
     "postId": 2
   },
   {
-    "id": 5,
     "name": "learn",
     "postId": 6
   },
   {
-    "id": 6,
     "name": "magic",
     "postId": 4
   },
   {
-    "id": 7,
     "name": "techfeed",
     "postId": 3
   },
   {
-    "id": 8,
     "name": "techfeed",
     "postId": 2
   },
   {
-    "id": 9,
     "name": "techfeed",
     "postId": 1
   }

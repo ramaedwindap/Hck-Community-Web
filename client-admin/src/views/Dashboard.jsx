@@ -15,10 +15,12 @@ export default function Dashboard() {
 
   async function fetchPosts() {
     try {
-      const response = await fetch(
-        "http://localhost:3000/posts?_expand=author&_embed=tags&_expand=category",
-        { method: "GET" }
-      );
+      const access_token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJuYW1lIjoicmFtYWVkd2luZGFwIiwiZW1haWwiOiJyYW1hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInBob25lTnVtYmVyIjoiMDg3NzIyMjc1MDA1IiwiYWRkcmVzcyI6IkNpcmVib24iLCJjcmVhdGVkQXQiOiIyMDIzLTA5LTA3VDExOjQ3OjEwLjQyOVoiLCJ1cGRhdGVkQXQiOiIyMDIzLTA5LTA3VDExOjQ3OjEwLjQyOVoiLCJpYXQiOjE2OTQwODcyMzN9.VRIT7zWvq4iiWfCcFIgYnIDj7N1sRG2jdY1CSZqRn6s";
+      const response = await fetch("http://localhost:3000/posts", {
+        method: "GET",
+        headers: { access_token },
+      });
       const result = await response.json();
       setPosts(result);
       setLoading(false);

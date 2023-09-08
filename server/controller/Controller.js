@@ -1,7 +1,8 @@
 const { hashPassword, verifyPassword } = require('../helper/bcyrpt')
-const { Post, Category, User, Tag } = require('../models')
+const { Post, Category, User, Tag, sequelize } = require('../models')
 const { signToken } = require('../helper/jwt')
 const { Sequelize } = require('sequelize')
+const slugify = require('../helper/slugify')
 
 class Controller {
     static async login(req, res, next) {
@@ -67,11 +68,44 @@ class Controller {
     }
 
     static async storePost(req, res, next) {
-        // try {
+        const transaction = await sequelize.transaction();
+        const { id: authorId } = req.user
+        const { title, content, imgUrl, tags, categoryId } = req.body
+        // console.log(user)
+        try {
+            const createSlug = slugify(title) + '-' + Math.floor(Math.random() * (999 - 100 + 1) + 100);
 
-        // } catch (error) {
-        //     next(error)
-        // }
+            if (!tags) throw { name: "tagRequired" }
+
+            const storePost = await Post.create({ title, slug: createSlug, content, imgUrl, authorId, categoryId }, { transaction })
+
+            const tagArr = tags.replaceAll(/\s/g, '').split('#')
+
+            //masih hardcode
+
+            const dataTags = []
+
+            tagArr.forEach(tag => {
+                if (tag !== "") {
+                    dataTags.push({
+                        postId: storePost.id,
+                        name: tag
+                    })
+                }
+            });
+
+            if (dataTags.length < 3) throw { name: "tagMinimun" }
+
+            // console.log(dataTags)
+            await Tag.bulkCreate(dataTags, { transaction: transaction })
+
+            res.status(200).json({ message: `Success add new post with id ${storePost.id}` })
+
+            await transaction.commit();
+        } catch (error) {
+            await transaction.rollback();
+            next(error)
+        }
     }
 
     static async updatePost(req, res, next) {
@@ -126,7 +160,7 @@ class Controller {
                     { model: Tag, as: "tags", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                 ]
             })
-            // console.log(posts)
+            console.log(hashPassword('12345'))
 
             res.status(200).json(posts)
         } catch (error) {

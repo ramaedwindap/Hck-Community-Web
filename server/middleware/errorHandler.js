@@ -19,6 +19,10 @@ function errorHandler(err, req, res, next) {
             return res.status(401).json({ message: "Invalid token" })
         case "notFound":
             return res.status(404).json({ message: "Not Found" })
+        case "tagRequired":
+            return res.status(400).json({ message: "Tags is required!" })
+        case "tagMinimun":
+            return res.status(400).json({ message: "Tags min 3!" })
 
         default:
             return res.status(500).json({ message: "Internal server error" })
