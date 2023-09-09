@@ -53,6 +53,10 @@ class Controller {
     static async indexPost(req, res, next) {
         try {
             const posts = await Post.findAll({
+                order: [
+                    // Will escape title and validate DESC against a list of valid direction parameters
+                    ['createdAt', 'DESC']
+                ],
                 include: [
                     { model: Category, as: "category", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                     { model: User, as: "author", attributes: { exclude: ['password'] } },
@@ -63,6 +67,20 @@ class Controller {
             res.status(200).json(posts)
         } catch (error) {
             // console.log(error)
+            next(error)
+        }
+    }
+
+    static async showPost(req, res, next) {
+        try {
+            const { id } = req.params
+
+            const foundPost = await Post.findByPk(id)
+
+            if (!foundPost) throw { name: "notFound" }
+
+            res.status(200).json(foundPost)
+        } catch (error) {
             next(error)
         }
     }
