@@ -21,9 +21,34 @@ export function handleLogin(form) {
 
             localStorage.setItem('access_token', data.access_token)
 
+            return { success: true, data: { message: "Login success!" } }
         } catch (error) {
-            console.log(error)
-            return error
+            // console.log(error)
+            return { success: false, error }
+        }
+    }
+}
+
+// Action Add User
+export function addUser(form) {
+    return async function (dispatch) {
+        try {
+            const access_token = localStorage.access_token
+
+            // console.log(form)
+
+            const res = await fetch("http://localhost:3000/add-user", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
+
+            const data = await res.json()
+
+            if (!res.ok) throw (data)
+
+            // console.log(data, "Ac")
+
+            return { success: true, data }
+        } catch (error) {
+            // console.log(error)
+            return { success: false, error }
         }
     }
 }
@@ -61,9 +86,10 @@ export function deletePost(id) {
 
             if (!res.ok) throw data
 
-            return data
+            return { success: true, data }
         } catch (error) {
-            console.log(error)
+            // console.log(error)
+            return { success: false, error }
         }
     }
 }

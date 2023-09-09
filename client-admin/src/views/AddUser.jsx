@@ -1,8 +1,43 @@
 import { IdentificationIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useState } from "react";
 import Title from "../components/Title";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/actionCreator";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function AddUser() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+    address: "",
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const res = await dispatch(addUser(form));
+
+    if (res.success) {
+      navigate("/");
+      console.log(res.data); // toast alert
+      toast.success(res.data.message);
+    } else {
+      console.log(res.error);
+      toast.error(res.error.message);
+    }
+  }
+
   return (
     <div className="w-full p-4 bg-white border shadow-lg rounded-2xl">
       <Title>
@@ -10,7 +45,7 @@ export default function AddUser() {
         Add User
       </Title>
       <div className="mt-4 overflow-x-auto border rounded-lg ">
-        <form className="p-4">
+        <form onSubmit={handleSubmit} className="p-4">
           <div className="space-y-12">
             <div className="pb-12 border-b border-gray-900/10">
               <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -26,6 +61,8 @@ export default function AddUser() {
                       type="text"
                       name="username"
                       id="username"
+                      value={form.username}
+                      onChange={handleChange}
                       autoComplete="username"
                       className="block w-full px-3 py-2 mt-2 text-sm transition duration-300 ease-in-out border border-gray-300 rounded-lg focus:border-gray-200 focus:ring focus:ring-green-100"
                     />
@@ -44,6 +81,8 @@ export default function AddUser() {
                       type="text"
                       name="phoneNumber"
                       id="phoneNumber"
+                      value={form.phoneNumber}
+                      onChange={handleChange}
                       autoComplete="phoneNumber"
                       required
                       className="block w-full px-3 py-2 mt-2 text-sm transition duration-300 ease-in-out border border-gray-300 rounded-lg focus:border-gray-200 focus:ring focus:ring-green-100"
@@ -63,6 +102,8 @@ export default function AddUser() {
                       id="email"
                       name="email"
                       type="email"
+                      value={form.email}
+                      onChange={handleChange}
                       autoComplete="email"
                       required
                       className="block w-full px-3 py-2 mt-2 text-sm transition duration-300 ease-in-out border border-gray-300 rounded-lg focus:border-gray-200 focus:ring focus:ring-green-100"
@@ -82,6 +123,8 @@ export default function AddUser() {
                       id="password"
                       name="password"
                       type="password"
+                      value={form.password}
+                      onChange={handleChange}
                       autoComplete="current-password"
                       required
                       className="block w-full px-3 py-2 mt-2 text-sm transition duration-300 ease-in-out border border-gray-300 rounded-lg focus:border-gray-200 focus:ring focus:ring-green-100"
@@ -101,6 +144,8 @@ export default function AddUser() {
                       type="text"
                       name="address"
                       id="address"
+                      value={form.address}
+                      onChange={handleChange}
                       autoComplete="address"
                       required
                       className="block w-full px-3 py-2 mt-2 text-sm transition duration-300 ease-in-out border border-gray-300 rounded-lg focus:border-gray-200 focus:ring focus:ring-green-100"

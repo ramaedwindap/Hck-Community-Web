@@ -1,4 +1,4 @@
-import { CommandLineIcon } from "@heroicons/react/24/outline";
+import { NewspaperIcon } from "@heroicons/react/24/outline";
 import Title from "../components/Title";
 import PostTableRow from "../components/PostTableRow";
 import { useEffect, useState } from "react";
@@ -23,8 +23,8 @@ export default function Dashboard() {
   return (
     <div className="w-full min-h-[500px] p-4 bg-white border shadow-lg rounded-2xl">
       <Title>
-        <CommandLineIcon />
-        Dashboard
+        <NewspaperIcon />
+        Posts
       </Title>
       {loading ? (
         <div className="mt-5 text-center">Loading..</div>

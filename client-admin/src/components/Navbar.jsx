@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
-import Sidebar from "./Sidebar";
+import SidebarResponsive from "./SidebarResponsive";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -90,7 +90,7 @@ export default function Navbar() {
 
                           <div className="mt-8">
                             <div className="flow-root">
-                              <Sidebar />
+                              <SidebarResponsive setOpen={setOpen} />
                             </div>
                           </div>
                         </div>

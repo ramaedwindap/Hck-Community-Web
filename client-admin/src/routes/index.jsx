@@ -1,5 +1,5 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import Dashboard from "../views/Dashboard";
+import Post from "../views/Post";
 import Category from "../views/Category";
 import AddUser from "../views/AddUser";
 import LayoutApp from "../views/LayoutApp";
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/",
-            element: <Dashboard />,
+            element: <Post />,
           },
           {
             path: "/categories",

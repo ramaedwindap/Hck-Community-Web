@@ -8,12 +8,15 @@ import {
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Sidebar() {
+export default function SidebarResponsive({ setOpen }) {
   const navigate = useNavigate();
 
   function handleSignOut() {
+    setOpen(false);
     localStorage.removeItem("access_token");
-    navigate("/login");
+    setTimeout(() => {
+      navigate("/login");
+    }, 500);
   }
 
   return (
@@ -27,6 +30,7 @@ export default function Sidebar() {
       </div>
       <Link
         to="/"
+        onClick={() => setOpen(false)}
         className="text-black flex items-center hover:bg-black hover:bg-opacity-10 rounded-md pl-2.5 py-2 text-sm gap-x-2 [&>svg]:w-[19px] [&>svg]:h-[19px] [&>svg]:stroke-[1.25] [&>svg]:hover:rotate-3"
       >
         <NewspaperIcon className="w-5 h-5 drop-shadow-sm" />
@@ -34,6 +38,7 @@ export default function Sidebar() {
       </Link>
       <Link
         to="/categories"
+        onClick={() => setOpen(false)}
         className="text-black flex items-center hover:bg-black hover:bg-opacity-10 rounded-md pl-2.5 py-2 text-sm gap-x-2 [&>svg]:w-[19px] [&>svg]:h-[19px] [&>svg]:stroke-[1.25] [&>svg]:hover:rotate-3"
       >
         <FolderOpenIcon className="w-5 h-5 drop-shadow-sm" />
@@ -41,6 +46,7 @@ export default function Sidebar() {
       </Link>
       <Link
         to="/add-user"
+        onClick={() => setOpen(false)}
         className="text-black flex items-center hover:bg-black hover:bg-opacity-10 rounded-md pl-2.5 py-2 text-sm gap-x-2 [&>svg]:w-[19px] [&>svg]:h-[19px] [&>svg]:stroke-[1.25] [&>svg]:hover:rotate-3"
       >
         <IdentificationIcon className="w-5 h-5 drop-shadow-sm" />

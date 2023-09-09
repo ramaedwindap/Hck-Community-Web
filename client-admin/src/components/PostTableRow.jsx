@@ -2,6 +2,7 @@ import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deletePost, fetchPosts } from "../store/actionCreator";
+import { toast } from "react-hot-toast";
 
 export default function PostTableRow({ post }) {
   // console.log(posts);
@@ -10,8 +11,13 @@ export default function PostTableRow({ post }) {
   async function handleDeletePost(id) {
     // console.log(id);
     const resDelete = await dispatch(deletePost(id));
-    await dispatch(fetchPosts());
-    console.log(resDelete); //install toast alert
+    if (resDelete.success) {
+      await dispatch(fetchPosts());
+      console.log(resDelete); //install toast alert
+      toast.success(resDelete.data.message);
+    } else {
+      toast.error(resDelete.error.message);
+    }
   }
 
   return (

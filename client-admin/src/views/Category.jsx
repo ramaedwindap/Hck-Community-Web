@@ -32,7 +32,27 @@ export default function Category() {
         <div className="mt-5 text-center">Loading..</div>
       ) : (
         <div className="relative mt-4 overflow-x-auto border rounded-lg ">
-          <CategoryTable categories={categories} />
+          <table className="w-full text-sm text-left text-gray-500">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Created At
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Updated At
+                </th>
+                <th className="px-6 py-3 sr-only">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {categories.map((category) => {
+                return <CategoryTable category={category} key={category.id} />;
+              })}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

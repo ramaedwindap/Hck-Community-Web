@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../store/actionCreator";
 import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -17,8 +18,14 @@ export default function LoginPage() {
     // console.log("submited", form);
     // localStorage.setItem("access_token", "kahbsouyfbskdbslafbalfafbns");
     const res = await dispatch(handleLogin(form));
-    console.log(res); // toast alert
-    navigate("/");
+
+    if (res.success) {
+      navigate("/");
+      console.log(res); // toast alert
+      toast.success(res.data.message);
+    } else {
+      toast.error(res.error.message);
+    }
   }
 
   function handleChange(e) {
