@@ -16,12 +16,9 @@ export default function LoginPage() {
     e.preventDefault();
     // console.log("submited", form);
     // localStorage.setItem("access_token", "kahbsouyfbskdbslafbalfafbns");
-    try {
-      await dispatch(handleLogin(form));
-      navigate("/");
-    } catch (error) {
-      console.log(error, "from components");
-    }
+    const res = await dispatch(handleLogin(form));
+    console.log(res); // toast alert
+    navigate("/");
   }
 
   function handleChange(e) {

@@ -23,6 +23,7 @@ export function handleLogin(form) {
 
         } catch (error) {
             console.log(error)
+            return error
         }
     }
 }
@@ -44,6 +45,25 @@ export function fetchPosts() {
             if (error.message == "Invalid token") {
                 localStorage.removeItem('access_token')
             }
+            return error
+        }
+    }
+}
+
+export function deletePost(id) {
+    return async function (dispatch) {
+        try {
+            const access_token = localStorage.access_token
+
+            const res = await fetch(`http://localhost:3000/posts/${id}`, { method: "DELETE", headers: { access_token } })
+
+            const data = await res.json()
+
+            if (!res.ok) throw data
+
+            return data
+        } catch (error) {
+            console.log(error)
         }
     }
 }

@@ -1,12 +1,23 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deletePost, fetchPosts } from "../store/actionCreator";
 
 export default function PostTableRow({ post }) {
   // console.log(posts);
+  const dispatch = useDispatch();
+
+  async function handleDeletePost(id) {
+    // console.log(id);
+    const resDelete = await dispatch(deletePost(id));
+    await dispatch(fetchPosts());
+    console.log(resDelete); //install toast alert
+  }
+
   return (
     <tr className="text-gray-800 bg-white border-b">
       <th scope="row" className="px-6 py-4 font-medium ">
-        <p className="max-w-[200px]">{post?.title}</p>
+        <p className="w-[200px]">{post?.title}</p>
       </th>
       <td className="px-6 py-4">
         <div className="w-[200px]">
@@ -29,7 +40,10 @@ export default function PostTableRow({ post }) {
           <button className="p-2 mr-2 border border-blue-800 rounded-md hover:text-blue-500 hover:border-blue-700 hover:bg-blue-50">
             <PencilSquareIcon className="w-5 h-5" />
           </button>
-          <button className="p-2 mr-2 border border-red-500 rounded-md hover:text-red-500 hover:border-red-700 hover:bg-red-50">
+          <button
+            onClick={() => handleDeletePost(post?.id)}
+            className="p-2 mr-2 border border-red-500 rounded-md hover:text-red-500 hover:border-red-700 hover:bg-red-50"
+          >
             <TrashIcon className="w-5 h-5 " />
           </button>
         </div>

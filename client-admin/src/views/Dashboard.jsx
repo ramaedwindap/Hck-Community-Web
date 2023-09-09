@@ -13,6 +13,7 @@ export default function Dashboard() {
   async function getPosts() {
     await dispatch(fetchPosts());
     setLoading(false);
+    // console.log(res);
   }
 
   useEffect(() => {
