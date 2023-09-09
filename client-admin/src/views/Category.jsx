@@ -2,33 +2,28 @@ import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
 import { FolderOpenIcon } from "@heroicons/react/24/outline";
 import CategoryTable from "../components/CategoryTable";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "../store/actionCreator";
 
 export default function Category() {
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.categoryReducer);
+
+  async function getCategories() {
+    await dispatch(fetchCategories());
+    setLoading(false);
+  }
 
   useEffect(() => {
-    fetchCategories();
+    getCategories();
   }, []);
 
   // console.log(posts);
 
-  async function fetchCategories() {
-    try {
-      const response = await fetch("http://localhost:3000/categories", {
-        method: "GET",
-      });
-      const result = await response.json();
-      setCategories(result);
-      // console.log(result);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
-    <div className="w-full p-4 bg-white border shadow-lg rounded-2xl min-h-[500px]">
+    <div className="w-full p-4 min-h-[500px] bg-white border shadow-lg rounded-2xl">
       <Title>
         <FolderOpenIcon />
         Categories

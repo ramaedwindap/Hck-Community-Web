@@ -54,7 +54,7 @@ class Controller {
         try {
             const posts = await Post.findAll({
                 include: [
-                    { model: Category, as: "categories", attributes: { exclude: ['createdAt', 'updatedAt'] } },
+                    { model: Category, as: "category", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                     { model: User, as: "author", attributes: { exclude: ['password'] } },
                     { model: Tag, as: "tags", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                 ]
@@ -208,7 +208,7 @@ class Controller {
         try {
             const posts = await Post.findAll({
                 include: [
-                    { model: Category, as: "categories", attributes: { exclude: ['createdAt', 'updatedAt'] } },
+                    { model: Category, as: "category", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                     { model: User, as: "author", attributes: { exclude: ['password'] } },
                     { model: Tag, as: "tags", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                 ]
@@ -228,7 +228,7 @@ class Controller {
             const post = await Post.findOne({
                 where: { slug },
                 include: [
-                    { model: Category, as: "categories", attributes: ['id', 'name'] },
+                    { model: Category, as: "category", attributes: ['id', 'name'] },
                     { model: User, as: "author", attributes: ['id', 'username', 'email'] },
                     { model: Tag, as: "tags", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                 ]

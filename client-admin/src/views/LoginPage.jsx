@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { handleLogin } from "../store/actionCreator";
+import { useDispatch } from "react-redux";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log("submited", form);
-    localStorage.setItem("access_token", "kahbsouyfbskdbslafbalfafbns");
-    navigate("/");
+    // console.log("submited", form);
+    // localStorage.setItem("access_token", "kahbsouyfbskdbslafbalfafbns");
+    try {
+      await dispatch(handleLogin(form));
+      navigate("/");
+    } catch (error) {
+      console.log(error, "from components");
+    }
   }
 
   function handleChange(e) {

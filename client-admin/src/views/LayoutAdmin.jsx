@@ -12,7 +12,7 @@ export default function LayoutAdmin() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full min-w-0 space-y-2 mt-7 ">
+      <div className="flex flex-col w-full min-w-0 min-h-screen space-y-2 mt-7">
         <Outlet />
       </div>
     </div>
