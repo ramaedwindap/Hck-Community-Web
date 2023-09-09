@@ -34,6 +34,22 @@ export default function PostTableRow({ post }) {
         </div>
       </td>
       <td className="px-6 py-4">{post?.category?.name}</td>
+      <td className="px-6 py-4">
+        <div className="w-[300px]">
+          <div className="flex flex-wrap">
+            {post?.tags?.map((tag) => {
+              return (
+                <div
+                  key={tag.id}
+                  className="px-3 cursor-none py-1.5 rounded-lg text-xs border border-white hover:border-green-500 text-slate-800"
+                >
+                  #{tag.name}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </td>
       <td className="px-6 py-4">{post?.author?.username}</td>
       <td className="px-6 py-4">
         <div className="flex items-center ">

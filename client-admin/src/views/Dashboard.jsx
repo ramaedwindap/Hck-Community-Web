@@ -36,7 +36,7 @@ export default function Dashboard() {
                 <th scope="col" className="px-6 py-3">
                   Title
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-center">
                   Image
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -44,6 +44,9 @@ export default function Dashboard() {
                 </th>
                 <th scope="col" className="px-6 py-3 ">
                   Category
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Tags
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Author
