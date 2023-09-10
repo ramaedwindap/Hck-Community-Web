@@ -37,35 +37,53 @@ export default function Category() {
           <PencilSquareIcon className="w-5 h-5" />
         </Link>
       </Title>
-      {loading ? (
-        <div className="mt-5 text-center">Loading..</div>
-      ) : (
-        <div className="relative mt-4 overflow-x-auto border rounded-lg ">
-          <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Created At
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Updated At
-                </th>
-                <th className="px-6 py-3 sr-only">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.map((category) => {
-                return (
-                  <CategoryTableRow category={category} key={category.id} />
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <div className="relative mt-4 overflow-x-auto border rounded-lg ">
+        <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Created At
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Updated At
+              </th>
+              <th className="px-6 py-3 sr-only">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading
+              ? Array(3)
+                  .fill()
+                  .map((_, i) => (
+                    <tr key={i} className="text-gray-800 bg-white border-b">
+                      <th scope="row" className="px-6 py-4">
+                        <div className="min-w-[200px] h-4 bg-gray-300 rounded animate-pulse"></div>
+                      </th>
+                      <td className="px-6 py-4">
+                        <div className="w-24 h-4 bg-gray-300 rounded animate-pulse"></div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="w-24 h-4 bg-gray-300 rounded animate-pulse"></div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-[37.6px] h-[37.6px] bg-gray-300 rounded-lg animate-pulse"></div>
+                          <div className="w-[37.6px] h-[37.6px] bg-gray-300 rounded-lg animate-pulse"></div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+              : categories.map((category) => {
+                  return (
+                    <CategoryTableRow category={category} key={category.id} />
+                  );
+                })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

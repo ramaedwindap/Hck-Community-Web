@@ -1,9 +1,11 @@
+import { CATEGORIES_FETCH_SUCCESS, CATEGORY_FETCH_SUCCESS, POSTS_FETCH_SUCCESS, POST_FETCH_SUCCESS } from "./actionTypes"
+
 // Action Login
 export function handleLogin(form) {
     return async function (dispatch) {
         try {
             // console.log(form)
-            const res = await fetch("http://localhost:3000/login", {
+            const res = await fetch("https://api-hck.sesber.com/login", {
                 method: "POST",
                 mode: "cors",
                 headers: {
@@ -36,7 +38,7 @@ export function addUser(form) {
         try {
             const access_token = localStorage.access_token
             // console.log(form)
-            const res = await fetch("http://localhost:3000/add-user", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
+            const res = await fetch("https://api-hck.sesber.com/add-user", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
 
             const data = await res.json()
 
@@ -57,13 +59,13 @@ export function fetchPosts() {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-            const res = await fetch("http://localhost:3000/posts", { method: "GET", headers: { access_token } })
+            const res = await fetch("https://api-hck.sesber.com/posts", { method: "GET", headers: { access_token } })
 
             const data = await res.json()
 
             if (!res.ok) throw (data)
 
-            dispatch({ type: "posts/fetchSuccess", payload: data })
+            dispatch({ type: POSTS_FETCH_SUCCESS, payload: data })
         } catch (error) {
             console.log(error)
             if (error.message == "Invalid token") {
@@ -78,13 +80,13 @@ export function fetchPost(id) {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-            const res = await fetch(`http://localhost:3000/posts/${id}`, { method: "GET", headers: { access_token } })
+            const res = await fetch(`https://api-hck.sesber.com/posts/${id}`, { method: "GET", headers: { access_token } })
 
             let data = await res.json()
 
             if (!res.ok) throw data
 
-            dispatch({ type: "post/fetchSuccess", payload: data })
+            dispatch({ type: POST_FETCH_SUCCESS, payload: data })
         } catch (error) {
             console.log(error)
             // return error
@@ -96,7 +98,7 @@ export function storePost(form) {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-            const res = await fetch("http://localhost:3000/posts", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
+            const res = await fetch("https://api-hck.sesber.com/posts", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
 
             const data = await res.json()
 
@@ -115,7 +117,7 @@ export function updatePost(slug, form) {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-            const res = await fetch(`http://localhost:3000/posts/${slug}`, { method: "PUT", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
+            const res = await fetch(`https://api-hck.sesber.com/posts/${slug}`, { method: "PUT", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
 
             const data = await res.json()
 
@@ -133,7 +135,7 @@ export function deletePost(id) {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-            const res = await fetch(`http://localhost:3000/posts/${id}`, { method: "DELETE", headers: { access_token } })
+            const res = await fetch(`https://api-hck.sesber.com/posts/${id}`, { method: "DELETE", headers: { access_token } })
 
             const data = await res.json()
 
@@ -152,14 +154,14 @@ export function fetchCategories() {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-            const res = await fetch("http://localhost:3000/categories", { method: "GET", headers: { access_token } })
+            const res = await fetch("https://api-hck.sesber.com/categories", { method: "GET", headers: { access_token } })
 
             const data = await res.json()
             // console.log(data)
 
             if (!res.ok) throw data
 
-            dispatch({ type: "categories/fetchSuccess", payload: data })
+            dispatch({ type: CATEGORIES_FETCH_SUCCESS, payload: data })
         } catch (error) {
             console.log(error)
             if (error.message == "Invalid token") {
@@ -173,7 +175,7 @@ export function storeCategory(form) {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-            const res = await fetch("http://localhost:3000/categories", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
+            const res = await fetch("https://api-hck.sesber.com/categories", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
             const data = await res.json()
 
             if (!res.ok) throw error
@@ -190,14 +192,14 @@ export function showCategory(id) {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-            const res = await fetch(`http://localhost:3000/categories/${id}`, { method: "GET", headers: { access_token } })
+            const res = await fetch(`https://api-hck.sesber.com/categories/${id}`, { method: "GET", headers: { access_token } })
             const data = await res.json()
 
             // console.log(data)
             if (!res.ok) throw data
 
 
-            dispatch({ type: 'category/fetchSuccess', payload: data })
+            dispatch({ type: CATEGORY_FETCH_SUCCESS, payload: data })
             // return { success: true, data }
         } catch (error) {
             // return { success: false, error }
@@ -209,7 +211,7 @@ export function updateCategory(id, form) {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-            const res = await fetch(`http://localhost:3000/categories/${id}`, { method: 'PUT', headers: { access_token, "Content-Type": "application/json" }, body: JSON.stringify(form) })
+            const res = await fetch(`https://api-hck.sesber.com/categories/${id}`, { method: 'PUT', headers: { access_token, "Content-Type": "application/json" }, body: JSON.stringify(form) })
             const data = await res.json()
 
             // console.log(data)
@@ -229,7 +231,7 @@ export function deleteCategory(id) {
             // console.log("delete bos?")
             const access_token = localStorage.access_token
 
-            const res = await fetch(`http://localhost:3000/categories/${id}`, { method: "DELETE", headers: { "Content-Type": "application/json", access_token } })
+            const res = await fetch(`https://api-hck.sesber.com/categories/${id}`, { method: "DELETE", headers: { "Content-Type": "application/json", access_token } })
 
             const data = await res.json()
 

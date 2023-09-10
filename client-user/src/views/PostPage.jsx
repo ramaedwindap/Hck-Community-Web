@@ -60,7 +60,35 @@ export default function PostPage() {
           </div>
           <div className="flex flex-col w-full space-y-2 lg:mr-4">
             {loading ? (
-              <p className="text-center">Loading..</p>
+              <article className="-mx-4 overflow-hidden border border-gray-100 shadow-sm bg-white0 sm:rounded-2xl sm:mx-0 animate-pulse">
+                <div className="object-cover w-full min-h-[300px] max-h-[400px] bg-gray-300"></div>
+                <div className="p-4 sm:p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="flex-none w-10 h-10 bg-gray-300 rounded-full"></div>
+                    <div className="space-y-2">
+                      <div className="w-24 h-4 text-sm bg-gray-300 rounded"></div>
+                      <div className="w-32 h-4 text-sm bg-gray-300 rounded"></div>
+                    </div>
+                  </div>
+
+                  <div className="flex mb-1 text-sm font-semibold pl-14">
+                    <div className="w-4 h-4 mr-2 mt-[1px] bg-gray-300 rounded"></div>
+                    <div className="w-16 h-4 text-sm bg-gray-300 rounded"></div>
+                  </div>
+                  <div className="mt-2 pl-14">
+                    <div className="w-3/4 h-6 py-1 text-3xl bg-gray-300 rounded"></div>
+                  </div>
+                  <div className="flex flex-wrap py-2 pl-14">
+                    <div className="px-2 py-1.5 mb-2 bg-gray-300 h-4 w-16 rounded text-xs"></div>
+                    <div className="px-2 py-1.5 mb-2 ml-2 bg-gray-300 h-4 w-14 rounded text-xs"></div>
+                  </div>
+                  <div className="pl-14">
+                    <div className="w-4/5 h-6 my-2 bg-gray-300 rounded pl-14"></div>
+                    <div className="w-3/5 h-6 my-2 bg-gray-300 rounded pl-14"></div>
+                    <div className="w-3/4 h-6 my-2 bg-gray-300 rounded pl-14"></div>
+                  </div>
+                </div>
+              </article>
             ) : (
               <article className="-mx-4 overflow-hidden bg-white border border-gray-100 shadow-sm sm:rounded-2xl sm:mx-0">
                 <img
@@ -135,7 +163,17 @@ export default function PostPage() {
           </div>
           <div className="hidden lg:block w-[250px] shrink-0">
             {loading ? (
-              ""
+              <div className="relative flex flex-col p-4 overflow-hidden bg-white border shadow-sm border-slate-100 rounded-xl animate-pulse">
+                <div className="absolute top-0 left-0 right-0 bg-gray-100 h-7"></div>
+                <div className="z-10 flex items-center gap-4 mb-4">
+                  <div className="flex-none w-10 h-10 bg-gray-300 rounded-lg"></div>
+
+                  <div className="w-full -mb-4">
+                    <div className="w-3/4 h-5 text-base bg-gray-300 rounded"></div>
+                  </div>
+                </div>
+                <div className="p-2 mt-4 bg-gray-300 rounded-lg h-9"></div>
+              </div>
             ) : (
               <div className="relative flex flex-col p-4 overflow-hidden bg-white border shadow-sm border-slate-100 rounded-xl">
                 <div className="absolute top-0 left-0 right-0 bg-black h-7"></div>

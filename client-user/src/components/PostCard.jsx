@@ -10,7 +10,7 @@ export default function PostCard(props) {
   //   console.log(props, "props post");
   return (
     <div>
-      <article className="-mx-4 overflow-hidden bg-white border border-gray-100 shadow-sm sm:rounded-2xl sm:mx-0">
+      <div className="-mx-4 overflow-hidden bg-white border border-gray-100 shadow-sm sm:rounded-2xl sm:mx-0">
         <Link to={"/posts/" + post?.slug}>
           <img
             src={post?.imgUrl}
@@ -81,7 +81,7 @@ export default function PostCard(props) {
             </button>
           </p>
         </div>
-      </article>
+      </div>
     </div>
   );
 }

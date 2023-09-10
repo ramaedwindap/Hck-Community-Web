@@ -4,7 +4,7 @@ export function fetchPosts() {
     return async function (dispatch) {
         try {
             const response = await fetch(
-                "http://localhost:3000/public/posts",
+                "https://api-hck.sesber.com/public/posts",
                 { method: "GET" }
             );
 
@@ -26,7 +26,7 @@ export function fetchPost(slug) {
     return async function (dispatch) {
         try {
             const response = await fetch(
-                `http://localhost:3000/public/posts/${slug}`,
+                `https://api-hck.sesber.com/public/posts/${slug}`,
                 { method: "GET" }
             );
 
@@ -46,7 +46,7 @@ export function fetchPost(slug) {
 export function fetchTopTags() {
     return async function (dispatch) {
         try {
-            const response = await fetch("http://localhost:3000/public/top-tags", {
+            const response = await fetch("https://api-hck.sesber.com/public/top-tags", {
                 method: "GET",
             });
 
