@@ -1,6 +1,8 @@
 import React from "react";
-import { BookmarkIcon } from "@heroicons/react/24/solid";
+import { BookmarkIcon, PaperClipIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import readingTime from "../../helper/readingTime";
+import convertDate from "../../helper/convertDate";
 
 export default function PostCard(props) {
   //   console.log(post);
@@ -29,13 +31,32 @@ export default function PostCard(props) {
               <p className="text-sm font-semibold">{post?.author?.username}</p>
 
               <div className="flow-root">
-                <p className="text-sm">{post?.createdAt}</p>
+                <p className="text-sm">{convertDate(post?.createdAt)}</p>
               </div>
             </div>
           </div>
 
+          <div className="flex mb-1 text-sm font-semibold pl-14">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4 h-4 mr-2 mt-[1px]"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5"></path>
+            </svg>
+            {post?.category?.name}
+          </div>
+
           <Link to={"/posts/" + post?.slug}>
-            <p className="text-xl font-bold text-gray-900 md:text-2xl lg:text-3xl pl-14 line-clamp-2">
+            <p className="py-1 text-xl font-bold text-gray-900 md:text-2xl lg:text-3xl pl-14 line-clamp-2">
               {post?.title}
             </p>
           </Link>
@@ -54,7 +75,7 @@ export default function PostCard(props) {
           </div>
 
           <p className="flex items-center justify-end gap-1 mt-4 text-xs font-medium group text-slate-700">
-            {post?.estimateRead} min read
+            {readingTime(post?.content)} min read
             <button>
               <BookmarkIcon className="w-4 h-4 ml-2 text-black" />
             </button>

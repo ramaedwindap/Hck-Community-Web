@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
-import Sidebar from "./Sidebar";
+import SidebarResponsive from "./SidebarResponsive";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function Navbar() {
     <>
       <header className="sticky top-0 z-40 w-full bg-white border-b border-slate-200">
         <div className="mx-auto max-w-7xl xl:px-8">
-          <div className="flex items-center justify-between w-full px-4 py-2 sm:px-6 lg:px-8 xl:px-0">
+          <div className="flex items-center justify-between w-full px-4 py-[9px] sm:px-6 lg:px-8 xl:px-0">
             <div className="flex items-center">
               {location.pathname == "/login" || (
                 <button
@@ -90,7 +90,7 @@ export default function Navbar() {
 
                           <div className="mt-8">
                             <div className="flow-root">
-                              <Sidebar />
+                              <SidebarResponsive setOpen={setOpen} />
                             </div>
                           </div>
                         </div>

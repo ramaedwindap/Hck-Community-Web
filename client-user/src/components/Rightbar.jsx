@@ -1,32 +1,37 @@
 import { BookmarkIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 import React from "react";
+import readingTime from "../../helper/readingTime";
 
-export default function Rightbar() {
+export default function Rightbar({ topTags }) {
   return (
-    <div className="hidden lg:block w-[250px] shrink-0">
-      <div className="border border-slate-100 shadow-sm bg-white rounded-xl overflow-hidden">
-        <div className="font-semibold text-base text-slate-900 p-4">
-          #discuss
-        </div>
-        <div className="text-sm border-t text-slate-900 text-justify p-4">
-          Why every startup should be built on open-source... 🤔🤔
-          <p className="group mt-4 flex justify-end items-center gap-1 text-xs font-medium text-slate-700">
-            5 min read
-            <button>
-              <BookmarkIcon className="h-4 w-4 ml-2 text-black" />
-            </button>
-          </p>
-        </div>
-        <div className="text-sm border-t text-slate-900 text-justify p-4">
-          Why every startup should be built on open-source... 🤔🤔
-          <p className="group mt-4 flex justify-end items-center gap-1 text-xs font-medium text-slate-700">
-            5 min read
-            <button>
-              <BookmarkIcon className="h-4 w-4 ml-2 text-black" />
-            </button>
-          </p>
-        </div>
-      </div>
+    <div className="hidden lg:block w-[250px] shrink-0 space-y-2">
+      {topTags.map((tag, i) => {
+        return (
+          <div
+            className="overflow-hidden bg-white border shadow-sm border-slate-100 rounded-xl"
+            key={i}
+          >
+            <div className="p-4 text-base font-semibold text-slate-900">
+              #{tag.tagName}
+            </div>
+            {tag.posts.map((post) => (
+              <div
+                className="p-4 text-sm text-justify border-t text-slate-900"
+                key={post.id}
+              >
+                <Link to={`/posts/${post.slug}`}>{post.title}</Link>
+                <p className="flex items-center justify-end gap-1 mt-4 text-xs font-medium group text-slate-700">
+                  {readingTime(post?.content)} min read
+                  <button>
+                    <BookmarkIcon className="w-4 h-4 ml-2 text-black" />
+                  </button>
+                </p>
+              </div>
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 }

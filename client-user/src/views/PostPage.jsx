@@ -7,6 +7,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPost } from "../store/actionCreator";
+import convertDate from "../../helper/convertDate";
 
 export default function PostPage() {
   const [loading, setLoading] = useState(true);
@@ -82,12 +83,33 @@ export default function PostPage() {
                       </p>
 
                       <div className="flow-root">
-                        <p className="text-sm">{post?.createdAt}</p>
+                        <p className="text-sm">
+                          {convertDate(post?.createdAt)}
+                        </p>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-3xl font-semibold text-gray-900 pl-14">
+                  <div className="flex mb-1 text-sm font-semibold pl-14">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4 mr-2 mt-[1px]"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5"></path>
+                    </svg>
+                    {post?.category?.name}
+                  </div>
+
+                  <p className="py-1 text-3xl font-semibold text-gray-900 pl-14">
                     {post?.title}
                   </p>
 
