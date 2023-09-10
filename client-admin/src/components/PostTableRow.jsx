@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deletePost, fetchPosts } from "../store/actionCreator";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function PostTableRow({ post }) {
   // console.log(posts);
@@ -59,12 +60,15 @@ export default function PostTableRow({ post }) {
       <td className="px-6 py-4">{post?.author?.username}</td>
       <td className="px-6 py-4">
         <div className="flex items-center ">
-          <button className="p-2 mr-2 border border-blue-800 rounded-md hover:text-blue-500 hover:border-blue-700 hover:bg-blue-50">
+          <Link
+            to={`/edit-post/${post?.slug}`}
+            className="p-2 mr-2 border border-blue-800 rounded-md hover:text-blue-500 hover:border-blue-700 hover:bg-blue-50"
+          >
             <PencilSquareIcon className="w-5 h-5" />
-          </button>
+          </Link>
           <button
             onClick={() => handleDeletePost(post?.id)}
-            className="p-2 mr-2 border border-red-500 rounded-md hover:text-red-500 hover:border-red-700 hover:bg-red-50"
+            className="p-2 border border-red-500 rounded-md hover:text-red-500 hover:border-red-700 hover:bg-red-50"
           >
             <TrashIcon className="w-5 h-5 " />
           </button>

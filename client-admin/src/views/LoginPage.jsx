@@ -21,7 +21,7 @@ export default function LoginPage() {
 
     if (res.success) {
       navigate("/");
-      console.log(res); // toast alert
+      // console.log(res); // toast alert
       toast.success(res.data.message);
     } else {
       toast.error(res.error.message);

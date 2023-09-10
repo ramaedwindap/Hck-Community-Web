@@ -28,7 +28,9 @@ router.get('/posts', Controller.indexPost)
 
 router.post('/posts', Controller.storePost)
 
-router.put('/posts/:id', Controller.updatePost)
+router.get('/posts/:slug', Controller.showPost)
+
+router.put('/posts/:slug', Controller.updatePost)
 
 router.delete('/posts/:id', Controller.destroyPost)
 

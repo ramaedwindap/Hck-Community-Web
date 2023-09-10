@@ -1,9 +1,10 @@
-import { NewspaperIcon } from "@heroicons/react/24/outline";
+import { NewspaperIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import Title from "../components/Title";
 import PostTableRow from "../components/PostTableRow";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../store/actionCreator";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -23,8 +24,16 @@ export default function Dashboard() {
   return (
     <div className="w-full min-h-[500px] p-4 bg-white border shadow-lg rounded-2xl">
       <Title>
-        <NewspaperIcon />
-        Posts
+        <div className="flex gap-x-2 [&>svg]:w-[22px] [&>svg]:h-[22px] md:[&>svg]:w-[24px] md:[&>svg]:h-[24px] [&>svg]:stroke-[1.5]">
+          <NewspaperIcon />
+          Posts
+        </div>
+        <Link
+          to="/create-post"
+          className="p-2 border rounded-md border-slate-700 text-slate-700 hover:text-slate-800 hover:border-slate-700 hover:bg-slate-50"
+        >
+          <PencilSquareIcon className="w-4 h-4" />
+        </Link>
       </Title>
       {loading ? (
         <div className="mt-5 text-center">Loading..</div>

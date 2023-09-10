@@ -16,7 +16,7 @@ export default function Navbar() {
     <>
       <header className="sticky top-0 z-40 w-full bg-white border-b border-slate-200">
         <div className="mx-auto max-w-7xl xl:px-8">
-          <div className="flex items-center justify-between w-full px-4 py-2 sm:px-6 lg:px-8 xl:px-0">
+          <div className="flex items-center justify-between w-full px-4 py-[9px] sm:px-6 lg:px-8 xl:px-0">
             <div className="flex items-center">
               {location.pathname == "/login" || (
                 <button

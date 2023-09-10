@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
 import { FolderOpenIcon } from "@heroicons/react/24/outline";
-import CategoryTable from "../components/CategoryTable";
+import CategoryTableRow from "../components/CategoryTableRow";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../store/actionCreator";
 
@@ -25,8 +25,11 @@ export default function Category() {
   return (
     <div className="w-full p-4 min-h-[500px] bg-white border shadow-lg rounded-2xl">
       <Title>
-        <FolderOpenIcon />
-        Categories
+        <div className="flex gap-x-2 [&>svg]:w-[22px] [&>svg]:h-[22px] md:[&>svg]:w-[24px] md:[&>svg]:h-[24px] [&>svg]:stroke-[1.5]">
+          <FolderOpenIcon />
+          Categories
+        </div>
+        <div>asd</div>
       </Title>
       {loading ? (
         <div className="mt-5 text-center">Loading..</div>
@@ -49,7 +52,9 @@ export default function Category() {
             </thead>
             <tbody>
               {categories.map((category) => {
-                return <CategoryTable category={category} key={category.id} />;
+                return (
+                  <CategoryTableRow category={category} key={category.id} />
+                );
               })}
             </tbody>
           </table>

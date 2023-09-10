@@ -56,7 +56,7 @@ export default function PostCard(props) {
           </div>
 
           <Link to={"/posts/" + post?.slug}>
-            <p className="text-xl font-bold text-gray-900 md:text-2xl lg:text-3xl pl-14 line-clamp-2">
+            <p className="py-1 text-xl font-bold text-gray-900 md:text-2xl lg:text-3xl pl-14 line-clamp-2">
               {post?.title}
             </p>
           </Link>

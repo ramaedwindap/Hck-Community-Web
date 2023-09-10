@@ -73,11 +73,22 @@ class Controller {
 
     static async showPost(req, res, next) {
         try {
-            const { id } = req.params
+            const { slug } = req.params
 
-            const foundPost = await Post.findByPk(id)
+            let foundPost = await Post.findOne({ where: { slug }, include: [{ model: Tag, as: 'tags' }] })
 
             if (!foundPost) throw { name: "notFound" }
+
+            let tags = ''
+
+            foundPost.tags.forEach(tag => {
+                tags += `#${tag.name} `
+            });
+
+            foundPost.dataValues.tags = tags
+
+            // console.log(foundPost)
+
 
             res.status(200).json(foundPost)
         } catch (error) {
@@ -129,10 +140,11 @@ class Controller {
     static async updatePost(req, res, next) {
         const transaction = await sequelize.transaction();
         const { title, content, imgUrl, tags, categoryId } = req.body
+        const { slug } = req.params
         try {
-            const { id } = req.params
-            // console.log(id)
-            const foundPost = await Post.findByPk(id)
+            const foundPost = await Post.findOne({ where: { slug } })
+
+            // console.log(foundPost.id)
 
             if (!foundPost) throw { name: "notFound" }
 
@@ -153,7 +165,7 @@ class Controller {
             tagArr.forEach(tag => {
                 if (tag !== "") {
                     dataTags.push({
-                        postId: id,
+                        postId: foundPost.id,
                         name: tag
                     })
                 }
@@ -164,7 +176,7 @@ class Controller {
             // console.log(dataTags)
             await Tag.bulkCreate(dataTags, { transaction })
 
-            res.status(200).json({ message: `Success update post with id ${id}` })
+            res.status(200).json({ message: `Success update post with id ${foundPost.id}` })
 
             await transaction.commit();
         } catch (error) {
@@ -225,6 +237,7 @@ class Controller {
     static async indexPublicPost(req, res, next) {
         try {
             const posts = await Post.findAll({
+                order: [['createdAt', 'DESC']],
                 include: [
                     { model: Category, as: "category", attributes: { exclude: ['createdAt', 'updatedAt'] } },
                     { model: User, as: "author", attributes: { exclude: ['password'] } },

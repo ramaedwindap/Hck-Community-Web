@@ -106,10 +106,10 @@ export default function PostPage() {
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9l6.5 -6.5"></path>
                     </svg>
-                    {post?.categories?.name}
+                    {post?.category?.name}
                   </div>
 
-                  <p className="text-3xl font-semibold text-gray-900 pl-14">
+                  <p className="py-1 text-3xl font-semibold text-gray-900 pl-14">
                     {post?.title}
                   </p>
 

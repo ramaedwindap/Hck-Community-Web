@@ -5,6 +5,8 @@ import AddUser from "../views/AddUser";
 import LayoutApp from "../views/LayoutApp";
 import LayoutAdmin from "../views/LayoutAdmin";
 import LoginPage from "../views/LoginPage";
+import CreatePost from "../views/CreatePost";
+import EditPost from "../views/EditPost";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
           {
             path: "/add-user",
             element: <AddUser />,
+          },
+          {
+            path: "/create-post",
+            element: <CreatePost />,
+          },
+          {
+            path: "/edit-post/:slug",
+            element: <EditPost />,
           },
         ],
       },

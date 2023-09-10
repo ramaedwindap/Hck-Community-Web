@@ -30,10 +30,11 @@ export default function AddUser() {
 
     if (res.success) {
       navigate("/");
-      console.log(res.data); // toast alert
+      // console.log(res.data); // toast alert
       toast.success(res.data.message);
+      navigate("/");
     } else {
-      console.log(res.error);
+      // console.log(res.error);
       toast.error(res.error.message);
     }
   }
@@ -41,8 +42,10 @@ export default function AddUser() {
   return (
     <div className="w-full p-4 bg-white border shadow-lg rounded-2xl">
       <Title>
-        <IdentificationIcon />
-        Add User
+        <div className="flex gap-x-2 [&>svg]:w-[22px] [&>svg]:h-[22px] md:[&>svg]:w-[24px] md:[&>svg]:h-[24px] [&>svg]:stroke-[1.5]">
+          <IdentificationIcon />
+          Add User
+        </div>
       </Title>
       <div className="mt-4 overflow-x-auto border rounded-lg ">
         <form onSubmit={handleSubmit} className="p-4">

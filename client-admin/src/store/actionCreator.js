@@ -29,14 +29,13 @@ export function handleLogin(form) {
     }
 }
 
+
 // Action Add User
 export function addUser(form) {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-
             // console.log(form)
-
             const res = await fetch("http://localhost:3000/add-user", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
 
             const data = await res.json()
@@ -75,11 +74,65 @@ export function fetchPosts() {
     }
 }
 
+export function fetchPost(id) {
+    return async function (dispatch) {
+        try {
+            const access_token = localStorage.access_token
+            const res = await fetch(`http://localhost:3000/posts/${id}`, { method: "GET", headers: { access_token } })
+
+            let data = await res.json()
+
+            if (!res.ok) throw data
+
+            dispatch({ type: "post/fetchSuccess", payload: data })
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    }
+}
+
+export function storePost(form) {
+    return async function (dispatch) {
+        try {
+            const access_token = localStorage.access_token
+            const res = await fetch("http://localhost:3000/posts", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
+
+            const data = await res.json()
+
+            if (!res.ok) throw data
+
+            return { success: true, data }
+        } catch (error) {
+            console.log(error)
+            return { success: false, error }
+        }
+    }
+}
+
+export function updatePost(slug, form) {
+    // console.log(form)
+    return async function (dispatch) {
+        try {
+            const access_token = localStorage.access_token
+            const res = await fetch(`http://localhost:3000/posts/${slug}`, { method: "PUT", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
+
+            const data = await res.json()
+
+            if (!res.ok) throw data
+
+            return { success: true, data }
+        } catch (error) {
+            console.log(error)
+            return { success: false, error }
+        }
+    }
+}
+
 export function deletePost(id) {
     return async function (dispatch) {
         try {
             const access_token = localStorage.access_token
-
             const res = await fetch(`http://localhost:3000/posts/${id}`, { method: "DELETE", headers: { access_token } })
 
             const data = await res.json()
