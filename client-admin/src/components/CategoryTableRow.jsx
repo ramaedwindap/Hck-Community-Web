@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { deleteCategory, fetchCategories } from "../store/actionCreator";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import convertDate from "../helper/convertDate";
 
 export default function CategoryTableRow({ category }) {
   const dispatch = useDispatch();
@@ -25,8 +26,8 @@ export default function CategoryTableRow({ category }) {
       <th scope="row" className="px-6 py-4 font-medium ">
         <p className="min-w-[200px]">{category?.name}</p>
       </th>
-      <td className="px-6 py-4">{category?.createdAt}</td>
-      <td className="px-6 py-4">{category?.updatedAt}</td>
+      <td className="px-6 py-4">{convertDate(category?.createdAt)}</td>
+      <td className="px-6 py-4">{convertDate(category?.updatedAt)}</td>
       <td className="px-6 py-4">
         <div className="flex items-center ">
           <Link

@@ -21,13 +21,6 @@ export default function SidebarResponsive({ setOpen }) {
 
   return (
     <>
-      <div className="font-medium text-black flex items-center rounded-md pl-2.5 py-2 text-sm gap-x-2 [&>svg]:w-[19px] [&>svg]:h-[19px] [&>svg]:stroke-[1.25] [&>svg]:hover:rotate-3">
-        <UserCircleIcon className="w-5 h-5 drop-shadow-sm" />
-        <span className="drop-shadow-sm">Rama Edwinda</span>
-      </div>
-      <div className="px-2.5">
-        <div className="block w-full h-px my-1 bg-gradient-to-r from-slate-500 via-slate-200"></div>
-      </div>
       <Link
         to="/"
         onClick={() => setOpen(false)}
