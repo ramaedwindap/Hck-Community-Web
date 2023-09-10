@@ -23,6 +23,9 @@ function errorHandler(err, req, res, next) {
             return res.status(400).json({ message: "Tags is required!" })
         case "tagMinimun":
             return res.status(400).json({ message: "Tags min 3!" })
+        case "minPassword":
+            return res.status(400).json({ message: "Password length minimun 5 character!" })
+
 
         default:
             return res.status(500).json({ message: "Internal server error" })

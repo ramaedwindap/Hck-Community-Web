@@ -40,6 +40,8 @@ class Controller {
 
             if (!password) throw { name: "passwordRequired" }
 
+            if (password.length < 5) throw { name: "minPassword" }
+
             const passwordHash = hashPassword(password)
 
             const user = await User.create({ email, username, password: passwordHash, phoneNumber, address })
