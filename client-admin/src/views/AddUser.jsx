@@ -29,7 +29,6 @@ export default function AddUser() {
     const res = await dispatch(addUser(form));
 
     if (res.success) {
-      navigate("/");
       // console.log(res.data); // toast alert
       toast.success(res.data.message);
       navigate("/");

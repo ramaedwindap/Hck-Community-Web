@@ -45,7 +45,7 @@ export default function EditPost() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("submit", form);
+    // console.log("submit", form);
     const res = await dispatch(updatePost(slug, form));
 
     if (res.success) {

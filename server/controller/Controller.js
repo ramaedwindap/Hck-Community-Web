@@ -283,6 +283,22 @@ class Controller {
         }
     }
 
+    static async showCategory(req, res, next) {
+        try {
+            const { id } = req.params
+
+            const foundCategory = await Category.findOne({ where: { id } })
+
+            // console.log(foundCategory)
+            if (!foundCategory) throw { name: "notFound" }
+
+            res.status(200).json(foundCategory)
+        } catch (error) {
+            // console.log(error)
+            next(error)
+        }
+    }
+
     static async storeCategory(req, res, next) {
         try {
             const { name } = req.body
@@ -327,7 +343,7 @@ class Controller {
 
             await foundCategory.destroy({ where: { id } })
 
-            res.status(200).json({ name: `Success delete category name ${categoryName}` })
+            res.status(200).json({ message: `Success delete category name ${categoryName}` })
         } catch (error) {
             next(error)
         }

@@ -30,9 +30,9 @@ export default function Dashboard() {
         </div>
         <Link
           to="/create-post"
-          className="p-2 border rounded-md border-slate-700 text-slate-700 hover:text-slate-800 hover:border-slate-700 hover:bg-slate-50"
+          className="p-2 -my-2 rounded-md text-slate-700 hover:text-slate-800 hover:shadow"
         >
-          <PencilSquareIcon className="w-4 h-4" />
+          <PencilSquareIcon className="w-5 h-5" />
         </Link>
       </Title>
       {loading ? (

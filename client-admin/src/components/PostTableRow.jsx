@@ -13,9 +13,9 @@ export default function PostTableRow({ post }) {
     // console.log(id);
     const resDelete = await dispatch(deletePost(id));
     if (resDelete.success) {
-      await dispatch(fetchPosts());
-      console.log(resDelete); //install toast alert
       toast.success(resDelete.data.message);
+      await dispatch(fetchPosts());
+      // console.log(resDelete); //install toast alert
     } else {
       toast.error(resDelete.error.message);
     }

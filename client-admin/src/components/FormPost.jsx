@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories, storePost } from "../store/actionCreator";
+import { fetchCategories } from "../store/actionCreator";
 
 export default function FormPost({ handleSubmit, form, setForm }) {
   const dispatch = useDispatch();

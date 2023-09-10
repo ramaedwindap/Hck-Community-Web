@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
-import { FolderOpenIcon } from "@heroicons/react/24/outline";
+import { FolderOpenIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import CategoryTableRow from "../components/CategoryTableRow";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../store/actionCreator";
+import { Link } from "react-router-dom";
 
 export default function Category() {
   // const [categories, setCategories] = useState([]);
@@ -29,7 +30,12 @@ export default function Category() {
           <FolderOpenIcon />
           Categories
         </div>
-        <div>asd</div>
+        <Link
+          to="/create-category"
+          className="p-2 -my-2 rounded-md text-slate-700 hover:text-slate-800 hover:shadow"
+        >
+          <PencilSquareIcon className="w-5 h-5" />
+        </Link>
       </Title>
       {loading ? (
         <div className="mt-5 text-center">Loading..</div>

@@ -39,6 +39,8 @@ router.get('/categories', Controller.indexCategory)
 
 router.post('/categories', Controller.storeCategory)
 
+router.get('/categories/:id', Controller.showCategory)
+
 router.put('/categories/:id', Controller.updateCategory)
 
 router.delete('/categories/:id', Controller.destroyCategory)

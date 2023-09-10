@@ -69,7 +69,7 @@ export function fetchPosts() {
             if (error.message == "Invalid token") {
                 localStorage.removeItem('access_token')
             }
-            return error
+            // return error
         }
     }
 }
@@ -87,7 +87,7 @@ export function fetchPost(id) {
             dispatch({ type: "post/fetchSuccess", payload: data })
         } catch (error) {
             console.log(error)
-            return error
+            // return error
         }
     }
 }
@@ -165,6 +165,80 @@ export function fetchCategories() {
             if (error.message == "Invalid token") {
                 localStorage.removeItem('access_token')
             }
+        }
+    }
+}
+
+export function storeCategory(form) {
+    return async function (dispatch) {
+        try {
+            const access_token = localStorage.access_token
+            const res = await fetch("http://localhost:3000/categories", { method: "POST", headers: { "Content-Type": "application/json", access_token }, body: JSON.stringify(form) })
+            const data = await res.json()
+
+            if (!res.ok) throw error
+
+            return { success: true, data }
+        } catch (error) {
+            return { success: false, error }
+            // console.log(error)
+        }
+    }
+}
+
+export function showCategory(id) {
+    return async function (dispatch) {
+        try {
+            const access_token = localStorage.access_token
+            const res = await fetch(`http://localhost:3000/categories/${id}`, { method: "GET", headers: { access_token } })
+            const data = await res.json()
+
+            // console.log(data)
+            if (!res.ok) throw data
+
+
+            dispatch({ type: 'category/fetchSuccess', payload: data })
+            // return { success: true, data }
+        } catch (error) {
+            // return { success: false, error }
+        }
+    }
+}
+
+export function updateCategory(id, form) {
+    return async function (dispatch) {
+        try {
+            const access_token = localStorage.access_token
+            const res = await fetch(`http://localhost:3000/categories/${id}`, { method: 'PUT', headers: { access_token, "Content-Type": "application/json" }, body: JSON.stringify(form) })
+            const data = await res.json()
+
+            // console.log(data)
+            if (!res.ok) throw data
+
+            return { success: true, data }
+        } catch (error) {
+            // console.log(error)
+            return { success: false, error }
+        }
+    }
+}
+
+export function deleteCategory(id) {
+    return async function (dispatch) {
+        try {
+            // console.log("delete bos?")
+            const access_token = localStorage.access_token
+
+            const res = await fetch(`http://localhost:3000/categories/${id}`, { method: "DELETE", headers: { "Content-Type": "application/json", access_token } })
+
+            const data = await res.json()
+
+            if (!res.ok) throw data
+
+            return { success: true, data }
+        } catch (error) {
+            // console.log(error)
+            return { success: false, error }
         }
     }
 }

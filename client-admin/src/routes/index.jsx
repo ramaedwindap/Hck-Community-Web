@@ -7,6 +7,8 @@ import LayoutAdmin from "../views/LayoutAdmin";
 import LoginPage from "../views/LoginPage";
 import CreatePost from "../views/CreatePost";
 import EditPost from "../views/EditPost";
+import CreateCategory from "../views/CreateCategory";
+import EditCategory from "../views/EditCategory";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
           {
             path: "/edit-post/:slug",
             element: <EditPost />,
+          },
+          {
+            path: "/create-category",
+            element: <CreateCategory />,
+          },
+          {
+            path: "/edit-category/:id",
+            element: <EditCategory />,
           },
         ],
       },
