@@ -1,92 +1,23 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=11713647&assignment_repo_type=AssignmentRepo)
+<h1 align="center"> Hck_Community </h1>
 
-# P3-Challenge-1
+![screenshot](./ss.png)
 
-- Tema Aplikasi: News portal
-- CSS Framework: Tailwind CSS
+<h4 align="center">HCK_Community is a Web App social network for software developers, inspired by the aesthetic of dev.to. It allows users to view articles on a wide range of topics related to software development, technology, programming, and more.</h4>
 
-Struktur Folder:
+<p align="center">
+  <a href="#techstack">Techstack</a> •
+  <a href="https://hck-site.web.app/">Demo (admin)</a> •
+  <a href="https://hck-community.web.app/">Demo (client)</a> •
+  <a href="#info">Info</a> 
+</p>
 
-- server (PORT: 3000)
-- client-user
-- client-admin
+## Techstack
 
-## W1D1
+This software uses the following open source packages: React.js, Redux, Express, Sequelize, Tailwind CSS, HeadlessUI, PostgreSQL, Redis, AWS EC2, JsonWebToken, Bcrypt.js.
 
-Target:
+## Info
 
-- [x] Lecture - React Intro
-- [x] React: Class Component vs Function Component
-- [x] Mempelajari State menggunakan useState
-- [x] Mengirim Props baik berupa sebuah state atau function
-- [ ] Event Handling (onClick, onChange, onSubmit)
-- [x] Conditional Rendering di dalam React
-- [x] Looping List of Data di dalam React
-- [x] Lifecycle component menggunakan useEffect
-- [x] Membuat server (json-server)
-- [x] Membuat react app untuk client-user (Styling)
-- [ ] Membuat react app untuk client-admin (CRUD)
-- [x] Menentukan Thema Aplikasi
-- [x] Menentukan Design dan pemilihan CSS Framework
+You're ready to go! <a href="https://hck-site.web.app/">HCK-Site (admin)</a> in your browser, and login with:
 
-**Report:**
-
-> Pada tugas ini, saya memilih Tema News Portal dengan mengambil referensi dari Dev.to, Saya juga akan menggunakan CSS Framework yaitu Tailwind CSS
-
-## W1D2
-
-Target:
-
-- [ ] Lecture - Custom Hooks
-- [x] Rules of Hooks
-- [x] Lecture - React-Router
-- [x] Membuat router user-side (min: home, detail)
-- [ ] Membuat router admin-side (min: login, add admin, CRUD main entitas, CRUD another entitas)
-- [ ] Membuat privateRoute untuk admin
-
-**Report:**
-
-...
-
-## W1D3
-
-Target:
-
-- [ ] Lecture - Redux
-- [ ] State vs Global State
-- [ ] Bagaimana cara membuat Store
-- [ ] Bagaimana cara membuat Reducer
-- [ ] Bagaimana cara membuat Action
-- [ ] Membuat Action Creators
-- [ ] Membuat Action Types
-- [ ] Lecture - Redux-thunk (handle async)
-- [ ] Cara menggunakan combineReducers
-
-**Report:**
-
-...
-
-## W1D4
-
-Target:
-
-- [ ] Lecture - SQL Transaction
-- [ ] Membuat server mengguanakan express.js, postgreSQL dan Sequelize
-- [ ] Menentukan associations antar tables
-- [ ] Lecture - AWS EC2
-- [ ] Membuat transaction saat membuat entitas baru pada main table. Pastikan ada assosiasi di dalamnya
-
-**Report:**
-
-...
-
-## W1D5
-
-Target:
-
-- [ ] LC Simulation
-- [ ] Practice, Practice, Practice
-
-**Report:**
-
-...
+- **Username:** admin@hck.com
+- **Password:** admin
